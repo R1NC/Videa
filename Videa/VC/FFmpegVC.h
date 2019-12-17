@@ -14,11 +14,13 @@
 
 -(void)selctVideoFromPhotoLibrary;
 
--(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo;
+-(void)didReceiveMediaUrl:(NSString*)url info:(MediaInformation *)info;
 
 -(void)didReceiveFFmpegLog:(NSString*)log;
 
 -(NSString*)tempFileUrlOfExt:(NSString *)ext;
+
+-(void)deleteTempFile:(NSString*)filePath;
 
 -(void)exeFFmpegCommand:(NSString *)cmd handler:(void(^)(BOOL))handler;
 

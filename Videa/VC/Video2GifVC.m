@@ -12,6 +12,7 @@
 
 @interface Video2GifVC ()
 
+@property(nonatomic,strong) NSString* url;
 @property(nonatomic,strong) MediaInformation* mediaInfo;
 
 @end
@@ -49,10 +50,11 @@
 }
 */
 
--(void)didReceiveMediaInfo:(MediaInformation*)mediaInfo {
-    [super didReceiveMediaInfo:mediaInfo];
-    _mediaInfo = mediaInfo;
-    _btnTransform.enabled = _mediaInfo && _mediaInfo.getPath;
+-(void)didReceiveMediaUrl:(NSString*)url info:(MediaInformation *)info {
+    [super didReceiveMediaUrl:url info:info];
+    _url = url;
+    _mediaInfo = info;
+    _btnTransform.enabled = _url && _url.length > 0;
     if (_mediaInfo && _mediaInfo.getRawInformation) _tvInfo.text = _mediaInfo.getRawInformation;
 }
 
@@ -65,14 +67,16 @@
     _btnTransform.enabled = NO;
     [self runTask:^{
         NSString* gifUrl = [self tempFileUrlOfExt:@"gif"];
-        NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", _mediaInfo.getPath, frameRate, gifUrl];
+        NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", _url, frameRate, gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
                 [self addPhotoLibraryResourceUrl:gifUrl type:PHAssetResourceTypePhoto handler:^(BOOL success) {
                     [self toastMsg:success ? @"GIF保存成功" : @"GIF保存失败"];
+                    if (!success) [self deleteTempFile:gifUrl];
                 }];
             } else {
                 [self toastMsg:@"视频转码失败"];
+                [self deleteTempFile:gifUrl];
             }
         }];
     }];

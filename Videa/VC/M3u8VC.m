@@ -83,9 +83,11 @@
             if (success) {
                 [self addPhotoLibraryResourceUrl:mp4Url type:PHAssetResourceTypeVideo handler:^(BOOL success) {
                     [self toastMsg:success ? @"视频保存成功" : @"视频保存失败"];
+                    if (!success) [self deleteTempFile:mp4Url];
                 }];
             } else {
                 [self toastMsg:@"视频下载失败"];
+                [self deleteTempFile:mp4Url];
             }
         }];
     }];
