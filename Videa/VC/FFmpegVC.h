@@ -12,7 +12,7 @@
 
 @interface FFmpegVC : UIViewController
 
--(void)openPhotoLibrary;
+-(void)selctVideoFromPhotoLibrary;
 
 -(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo;
 

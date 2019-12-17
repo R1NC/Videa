@@ -24,6 +24,9 @@
     _ipc = [UIImagePickerController new];
     _ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     _ipc.mediaTypes = @[(NSString*)kUTTypeMovie];
+    if (@available(iOS 11.0, *)) {
+        _ipc.videoExportPreset = AVAssetExportPresetPassthrough;
+    }
     _ipc.delegate = self;
     _workingQueue = dispatch_queue_create("FFmpeg", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_BACKGROUND, 0));
     [MobileFFmpegConfig setLogDelegate:self];
@@ -34,7 +37,7 @@
     [super viewDidDisappear:animated];
 }
 
--(void)openPhotoLibrary {
+-(void)selctVideoFromPhotoLibrary {
     [self presentViewController:_ipc animated:YES completion:nil];
 }
 

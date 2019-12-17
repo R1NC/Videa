@@ -28,7 +28,7 @@
 }
 
 - (IBAction)onClickBtnSelect:(id)sender {
-    [self openPhotoLibrary];
+    [self selctVideoFromPhotoLibrary];
 }
 
 - (IBAction)onClickBtnTransform:(id)sender {
