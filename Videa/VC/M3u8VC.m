@@ -26,6 +26,8 @@
 }
 
 - (IBAction)onClickBtnDownload:(id)sender {
+    _btnDownload.enabled = NO;
+    _tvUrl.enabled = NO;
     NSString* url = _tvUrl.text;
     if ([url rangeOfString:@".m3u8"].location == NSNotFound) {
         NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url]];
@@ -72,8 +74,6 @@
 }
 
 -(void)downloadM3u8:(NSString*)m3u8 {
-    _btnDownload.enabled = NO;
-    _tvUrl.enabled = NO;
     [self runTask:^{
         NSString* mp4Url = [self tempFileUrlOfExt:@"mp4"];
         NSString* cmd = [NSString stringWithFormat:@"-protocol_whitelist file,http,https,tcp,tls,crypto -i \"%@\" -c copy %@", m3u8, mp4Url];

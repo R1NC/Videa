@@ -13,6 +13,7 @@
 
 @property(nonatomic,strong) UIImagePickerController* ipc;
 @property(nonatomic,strong) dispatch_queue_t workingQueue;
+@property(nonatomic,assign) BOOL isWorking;
 
 @end
 
@@ -29,7 +30,7 @@
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
-    [MobileFFmpeg cancel];
+    if (_isWorking) [MobileFFmpeg cancel];
     [super viewDidDisappear:animated];
 }
 
@@ -51,12 +52,14 @@
 
 -(void)exeFFmpegCommand:(NSString *)cmd handler:(void(^)(BOOL))handler {
     if (cmd && cmd.length > 0) {
+        _isWorking = YES;
         [MobileFFmpeg execute:cmd];
         int rc = [MobileFFmpeg getLastReturnCode];
         NSString *output = [MobileFFmpeg getLastCommandOutput];
         BOOL success = rc == RETURN_CODE_SUCCESS;
         if (handler) handler(success);
         if (!success) NSLog(@"FFMpeg command execution failed with rc=%d and output=%@.\n", rc, output);
+        _isWorking = NO;
     }
 }
 
