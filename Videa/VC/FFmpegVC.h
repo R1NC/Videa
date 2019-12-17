@@ -14,7 +14,7 @@
 
 -(void)selctVideoFromPhotoLibrary;
 
--(void)didReceiveMediaUrl:(NSString*)url info:(MediaInformation *)info;
+-(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo;
 
 -(void)didReceiveFFmpegLog:(NSString*)log;
 

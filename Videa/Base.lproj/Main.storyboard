@@ -200,6 +200,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="视频 ➔ GIF" id="r8e-de-JSG"/>
                     <connections>
+                        <outlet property="btnSelectVideo" destination="o57-hT-lhP" id="7zN-of-dQU"/>
                         <outlet property="btnTransform" destination="XSi-yn-wqP" id="eT0-Pg-hZg"/>
                         <outlet property="tvFrameRate" destination="4VX-rA-9iA" id="E4X-yk-WXf"/>
                         <outlet property="tvInfo" destination="0hO-dz-ve1" id="Enn-0J-qqf"/>

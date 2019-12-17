@@ -102,10 +102,10 @@ static Toast *instance;
                          self.alpha = 0;
                      }
                      completion:^(BOOL finished) {
-                         if (finished && !_timer) {
-                             if (_block) {
-                                 _block();
-                                 _block = nil;
+                         if (finished && !self.timer) {
+                             if (self.block) {
+                                 self.block();
+                                 self.block = nil;
                              }
                              [self removeFromSuperview];
                          }

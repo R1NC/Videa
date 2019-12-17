@@ -96,8 +96,8 @@
 -(void)toastMsg:(NSString*)msg {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[Toast shared] showText:msg];
-        _btnDownload.enabled = YES;
-        _tvUrl.enabled = YES;
+        self.btnDownload.enabled = YES;
+        self.tvUrl.enabled = YES;
     });
 }
 

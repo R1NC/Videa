@@ -12,7 +12,6 @@
 
 @interface Video2GifVC ()
 
-@property(nonatomic,strong) NSString* url;
 @property(nonatomic,strong) MediaInformation* mediaInfo;
 
 @end
@@ -22,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     SetTapCallback(self.view, @selector(onTapRoot));
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [self deleteTempVideoFile];
+    [super viewDidDisappear:animated];
 }
 
 -(void)onTapRoot {
@@ -50,11 +54,11 @@
 }
 */
 
--(void)didReceiveMediaUrl:(NSString*)url info:(MediaInformation *)info {
-    [super didReceiveMediaUrl:url info:info];
-    _url = url;
-    _mediaInfo = info;
-    _btnTransform.enabled = _url && _url.length > 0;
+-(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo {
+    [super didReceiveMediaInfo:mediaInfo];
+    [self deleteTempVideoFile];
+    _mediaInfo = mediaInfo;
+    _btnTransform.enabled = _mediaInfo && _mediaInfo.getPath && _mediaInfo.getPath.length > 0;
     if (_mediaInfo && _mediaInfo.getRawInformation) _tvInfo.text = _mediaInfo.getRawInformation;
 }
 
@@ -64,14 +68,16 @@
 }
 
 -(void)transformWithFrameRate:(NSInteger)frameRate {
+    _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;
+    _tvFrameRate.enabled = NO;
     [self runTask:^{
         NSString* gifUrl = [self tempFileUrlOfExt:@"gif"];
-        NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", _url, frameRate, gifUrl];
+        NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", self.mediaInfo.getPath, frameRate, gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
                 [self addPhotoLibraryResourceUrl:gifUrl type:PHAssetResourceTypePhoto handler:^(BOOL success) {
-                    [self toastMsg:success ? @"GIF保存成功" : @"GIF保存失败"];
+                    [self toastMsg:success ? @"GIF 保存成功" : @"GIF 保存失败"];
                     if (!success) [self deleteTempFile:gifUrl];
                 }];
             } else {
@@ -82,10 +88,18 @@
     }];
 }
 
+-(void)deleteTempVideoFile {
+    if (_mediaInfo && _mediaInfo.getPath && _mediaInfo.getPath.length > 0) {
+        [self deleteTempFile:_mediaInfo.getPath];
+    }
+}
+
 -(void)toastMsg:(NSString*)msg {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[Toast shared] showText:msg];
-        _btnTransform.enabled = YES;
+        self.btnSelectVideo.enabled = YES;
+        self.btnTransform.enabled = YES;
+        self.tvFrameRate.enabled = YES;
     });
 }
 

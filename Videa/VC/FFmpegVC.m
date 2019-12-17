@@ -41,8 +41,8 @@
     [self presentViewController:_ipc animated:YES completion:nil];
 }
 
--(void)didReceiveMediaUrl:(NSString*)url info:(MediaInformation *)info {
-    NSLog(@"Video info: %@", info.getRawInformation);
+-(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo {
+    NSLog(@"Video info: %@", mediaInfo.getRawInformation);
 }
 
 -(void)didReceiveFFmpegLog:(NSString*)log {
@@ -105,14 +105,18 @@
     [_ipc dismissViewControllerAnimated:YES completion:nil];
     if (info && info[UIImagePickerControllerMediaURL]) {
         [self runTask:^{
-            NSString* url = [info[UIImagePickerControllerMediaURL] absoluteString];
-            MediaInformation* mediaInfo = [MobileFFmpeg getMediaInformation:url];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self didReceiveMediaUrl:url info:mediaInfo];
-            });
+            NSString* tempMov = [self tempFileUrlOfExt:@"MOV"];
+            NSError* err;
+            [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
+            if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
+                MediaInformation* mediaInfo = [MobileFFmpeg getMediaInformation:tempMov];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self didReceiveMediaInfo:mediaInfo];
+                });
+            }
         }];
     } else {
-        [self didReceiveMediaUrl:nil info:nil];
+        [self didReceiveMediaInfo:nil];
     }
 }
 
