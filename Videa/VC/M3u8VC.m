@@ -28,27 +28,29 @@
 - (IBAction)onClickBtnDownload:(id)sender {
     _btnDownload.enabled = NO;
     _tvUrl.enabled = NO;
-    NSString* url = _tvUrl.text;
+    __block NSString* url = _tvUrl.text;
     if ([url rangeOfString:@".m3u8"].location == NSNotFound) {
-        NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url]];
-        if (html && html.length > 0) {
-            NSRange rangeM3u8 = [html rangeOfString:@".m3u8"];
-            if (rangeM3u8.location != NSNotFound) {
-                NSString* strEndWithM3u8 = [html substringToIndex:rangeM3u8.location + rangeM3u8.length];
-                NSRange rangeHttpScheme = [strEndWithM3u8 rangeOfString:@"http://" options:NSBackwardsSearch];
-                NSRange rangeHttpsScheme = [strEndWithM3u8 rangeOfString:@"https://" options:NSBackwardsSearch];
-                if (rangeHttpScheme.location != NSNotFound) {
-                    url = [strEndWithM3u8 substringFromIndex:rangeHttpScheme.location];
-                } else if (rangeHttpsScheme.location != NSNotFound) {
-                    url = [strEndWithM3u8 substringFromIndex:rangeHttpsScheme.location];
+        [self runTask:^{
+            NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url]];
+            if (html && html.length > 0) {
+                NSRange rangeM3u8 = [html rangeOfString:@".m3u8"];
+                if (rangeM3u8.location != NSNotFound) {
+                    NSString* strEndWithM3u8 = [html substringToIndex:rangeM3u8.location + rangeM3u8.length];
+                    NSRange rangeHttpScheme = [strEndWithM3u8 rangeOfString:@"http://" options:NSBackwardsSearch];
+                    NSRange rangeHttpsScheme = [strEndWithM3u8 rangeOfString:@"https://" options:NSBackwardsSearch];
+                    if (rangeHttpScheme.location != NSNotFound) {
+                        url = [strEndWithM3u8 substringFromIndex:rangeHttpScheme.location];
+                    } else if (rangeHttpsScheme.location != NSNotFound) {
+                        url = [strEndWithM3u8 substringFromIndex:rangeHttpsScheme.location];
+                    }
+                    [self downloadM3u8:url];
+                    return;
                 }
-                [self downloadM3u8:url];
-                return;
+                [self toastMsg:@"该网页未发现m3u8资源"];
+            } else {
+                [self toastMsg:@"网页内容抓取失败"];
             }
-            [self toastMsg:@"该网页未发现m3u8资源"];
-        } else {
-            [self toastMsg:@"网页内容抓取失败"];
-        }
+        }];
     } else {
         [self downloadM3u8:url];
     }
