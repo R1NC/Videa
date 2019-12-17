@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hkh-RI-0zq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -7,53 +7,223 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--MainVC-->
+        <!--Videa-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainVC" sceneMemberID="viewController">
+                <viewController title="Videa" id="BYZ-38-t0r" customClass="MainVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nnp-be-bFS">
-                                <rect key="frame" x="20" y="94" width="374" height="30"/>
+                                <rect key="frame" x="15" y="103" width="384" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="a7t-OZ-4Fn"/>
                                 </constraints>
-                                <state key="normal" title="视频转 GIF"/>
+                                <state key="normal" title="视频 ➔ GIF"/>
                                 <connections>
                                     <segue destination="M1l-wi-EeI" kind="show" id="2K2-vB-E4E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idG-N2-DUa">
+                                <rect key="frame" x="15" y="148" width="384" height="30"/>
+                                <state key="normal" title="下载 m3u8"/>
+                                <connections>
+                                    <segue destination="DFw-f4-4xt" kind="show" id="9P4-I2-NMi"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Nnp-be-bFS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="1Ml-ef-utS"/>
-                            <constraint firstItem="Nnp-be-bFS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iLg-7y-hOz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nnp-be-bFS" secondAttribute="trailing" constant="20" id="nkd-Cc-DVl"/>
+                            <constraint firstItem="idG-N2-DUa" firstAttribute="top" secondItem="Nnp-be-bFS" secondAttribute="bottom" constant="15" id="Ez7-zT-fiJ"/>
+                            <constraint firstItem="Nnp-be-bFS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="Mph-Qy-ztz"/>
+                            <constraint firstItem="idG-N2-DUa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="OXf-Lx-xnz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="idG-N2-DUa" secondAttribute="trailing" constant="15" id="cLx-nr-Qse"/>
+                            <constraint firstItem="Nnp-be-bFS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="iLg-7y-hOz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nnp-be-bFS" secondAttribute="trailing" constant="15" id="nkd-Cc-DVl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Videa" id="dWL-GS-zUB"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+            <point key="canvasLocation" x="303" y="65"/>
         </scene>
-        <!--Video2 GifVC-->
+        <!--下载 m3u8-->
+        <scene sceneID="C77-LV-qup">
+            <objects>
+                <viewController title="下载 m3u8" id="DFw-f4-4xt" customClass="M3u8VC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wqM-Q0-OBc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-39-Ewe">
+                                <rect key="frame" x="76" y="103" width="323" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Ifs-aw-VzT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                <connections>
+                                    <action selector="didEndEditUrl:" destination="DFw-f4-4xt" eventType="editingDidEnd" id="9oE-De-VMm"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="链接：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQ5-aS-rZt">
+                                <rect key="frame" x="15" y="103" width="46" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="drh-ot-38A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-CD-2tq">
+                                <rect key="frame" x="15" y="153" width="384" height="649"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4I-SJ-F6q">
+                                <rect key="frame" x="15" y="817" width="384" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="DzK-Ok-pLi"/>
+                                </constraints>
+                                <state key="normal" title="下载"/>
+                                <connections>
+                                    <action selector="onClickBtnDownload:" destination="DFw-f4-4xt" eventType="touchUpInside" id="SXg-gl-R8x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="p4I-SJ-F6q" secondAttribute="bottom" constant="15" id="0UK-bt-LmB"/>
+                            <constraint firstItem="p4I-SJ-F6q" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="15" id="2Kb-Sb-tIy"/>
+                            <constraint firstItem="eGU-39-Ewe" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="15" id="6oX-ZW-hg5"/>
+                            <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="FJF-mk-bK3"/>
+                            <constraint firstItem="p4I-SJ-F6q" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="GxJ-ns-udL"/>
+                            <constraint firstItem="EQ5-aS-rZt" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="15" id="V8Y-8B-rgG"/>
+                            <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="EQ5-aS-rZt" secondAttribute="trailing" constant="15" id="Wpx-YC-TTO"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="p4I-SJ-F6q" secondAttribute="trailing" constant="15" id="bpS-pb-pqw"/>
+                            <constraint firstItem="EQ5-aS-rZt" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="q8Q-o8-noq"/>
+                            <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="EQ5-aS-rZt" secondAttribute="trailing" constant="15" id="qiD-7M-wV0"/>
+                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="15" id="sk1-RC-hEt"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="15" id="syC-LA-ddG"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="15" id="yij-Eq-9Wf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kCI-HC-OQV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="下载 m3u8" id="j7J-Up-E65"/>
+                    <connections>
+                        <outlet property="btnDownload" destination="p4I-SJ-F6q" id="kOM-34-VHD"/>
+                        <outlet property="tvInfo" destination="xAr-CD-2tq" id="Pz6-5B-gvr"/>
+                        <outlet property="tvUrl" destination="eGU-39-Ewe" id="Pl2-ng-UV2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1i-AL-f5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1052" y="766"/>
+        </scene>
+        <!--视频 -> GIF-->
         <scene sceneID="pSO-nE-TRn">
             <objects>
-                <viewController id="M1l-wi-EeI" customClass="Video2GifVC" sceneMemberID="viewController">
+                <viewController title="视频 -&gt; GIF" id="M1l-wi-EeI" customClass="Video2GifVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cat-gk-iUy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSi-yn-wqP">
+                                <rect key="frame" x="15" y="817" width="384" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="97h-QB-1qf"/>
+                                </constraints>
+                                <state key="normal" title="转换"/>
+                                <connections>
+                                    <action selector="onClickBtnTransform:" destination="M1l-wi-EeI" eventType="touchUpInside" id="y5b-Vo-M3t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o57-hT-lhP">
+                                <rect key="frame" x="15" y="103" width="384" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="rBb-P4-jsY"/>
+                                </constraints>
+                                <state key="normal" title="选取视频"/>
+                                <connections>
+                                    <action selector="onClickBtnSelect:" destination="M1l-wi-EeI" eventType="touchUpInside" id="48H-AL-ZIj"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4VX-rA-9iA">
+                                <rect key="frame" x="76" y="767" width="323" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="D2J-fO-JND"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帧率：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC5-kV-m2h">
+                                <rect key="frame" x="15" y="767" width="46" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="hsc-RL-EOh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hO-dz-ve1">
+                                <rect key="frame" x="15" y="148" width="384" height="604"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="XSi-yn-wqP" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="4qa-hD-tmm"/>
+                            <constraint firstItem="0hO-dz-ve1" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="60d-lr-z5y"/>
+                            <constraint firstItem="4VX-rA-9iA" firstAttribute="top" secondItem="0hO-dz-ve1" secondAttribute="bottom" constant="15" id="7C3-yf-AwE"/>
+                            <constraint firstItem="4VX-rA-9iA" firstAttribute="leading" secondItem="HC5-kV-m2h" secondAttribute="trailing" constant="15" id="7Vq-IF-eWn"/>
+                            <constraint firstItem="XSi-yn-wqP" firstAttribute="top" secondItem="4VX-rA-9iA" secondAttribute="bottom" constant="15" id="Cth-CC-QS7"/>
+                            <constraint firstItem="o57-hT-lhP" firstAttribute="top" secondItem="m2a-f6-qcm" secondAttribute="top" constant="15" id="Eke-gt-t7F"/>
+                            <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="0hO-dz-ve1" secondAttribute="trailing" constant="15" id="L4y-Ds-Ya1"/>
+                            <constraint firstItem="m2a-f6-qcm" firstAttribute="bottom" secondItem="XSi-yn-wqP" secondAttribute="bottom" constant="15" id="Ouo-nV-XJB"/>
+                            <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="4VX-rA-9iA" secondAttribute="trailing" constant="15" id="TuV-9J-kdI"/>
+                            <constraint firstItem="o57-hT-lhP" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="U3m-TE-tT9"/>
+                            <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="o57-hT-lhP" secondAttribute="trailing" constant="15" id="ivn-tL-RaB"/>
+                            <constraint firstItem="XSi-yn-wqP" firstAttribute="top" secondItem="HC5-kV-m2h" secondAttribute="bottom" constant="15" id="krJ-b3-Fkb"/>
+                            <constraint firstItem="0hO-dz-ve1" firstAttribute="top" secondItem="o57-hT-lhP" secondAttribute="bottom" constant="15" id="nGH-O7-RSX"/>
+                            <constraint firstItem="HC5-kV-m2h" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="ooY-YA-KGr"/>
+                            <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="XSi-yn-wqP" secondAttribute="trailing" constant="15" id="tzL-4P-dVR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="m2a-f6-qcm"/>
                     </view>
-                    <navigationItem key="navigationItem" id="r8e-de-JSG"/>
+                    <navigationItem key="navigationItem" title="视频 ➔ GIF" id="r8e-de-JSG"/>
+                    <connections>
+                        <outlet property="btnTransform" destination="XSi-yn-wqP" id="eT0-Pg-hZg"/>
+                        <outlet property="tvFrameRate" destination="4VX-rA-9iA" id="E4X-yk-WXf"/>
+                        <outlet property="tvInfo" destination="0hO-dz-ve1" id="Enn-0J-qqf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tU3-ou-znE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="949" y="138"/>
+            <point key="canvasLocation" x="1068" y="74"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ytr-O6-5ZX">
+            <objects>
+                <navigationController id="Hkh-RI-0zq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bht-3v-me4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="G2o-xq-Ecd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rey-1r-h1m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-603" y="83"/>
         </scene>
     </scenes>
 </document>

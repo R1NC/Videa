@@ -7,6 +7,7 @@
 //
 
 #import "MainVC.h"
+#import "AppPermissionHandler.h"
 
 @interface MainVC ()
 
@@ -16,8 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [AppPermissionHandler checkPhotoLibraryWithHandler:^(BOOL granted) {
+        if (!granted) {
+            exit(0);
+        }
+    }];
+}
 
 @end
