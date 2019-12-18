@@ -31,7 +31,7 @@
     __block NSString* url = _tvUrl.text;
     if ([url rangeOfString:@".m3u8"].location == NSNotFound) {
         [self runTask:^{
-            NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url]];
+            NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil];
             if (html && html.length > 0) {
                 NSRange rangeM3u8 = [html rangeOfString:@".m3u8"];
                 if (rangeM3u8.location != NSNotFound) {
@@ -81,9 +81,11 @@
         NSString* cmd = [NSString stringWithFormat:@"-protocol_whitelist file,http,https,tcp,tls,crypto -i \"%@\" -c copy %@", m3u8, mp4Url];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
+                __weak typeof(self) weakSelf = self;
                 [self addPhotoLibraryResourceUrl:mp4Url type:PHAssetResourceTypeVideo handler:^(BOOL success) {
-                    [self toastMsg:success ? @"视频保存成功" : @"视频保存失败"];
-                    if (!success) [self deleteTempFile:mp4Url];
+                    __strong typeof(self) strongSelf = weakSelf;
+                    [strongSelf toastMsg:success ? @"视频保存成功" : @"视频保存失败"];
+                    if (!success) [strongSelf deleteTempFile:mp4Url];
                 }];
             } else {
                 [self toastMsg:@"视频下载失败"];

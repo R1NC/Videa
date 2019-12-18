@@ -76,9 +76,11 @@
         NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", self.mediaInfo.getPath, frameRate, gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
+                __weak typeof(self) weakSelf = self;
                 [self addPhotoLibraryResourceUrl:gifUrl type:PHAssetResourceTypePhoto handler:^(BOOL success) {
-                    [self toastMsg:success ? @"GIF 保存成功" : @"GIF 保存失败"];
-                    if (!success) [self deleteTempFile:gifUrl];
+                    __strong typeof(self) strongSelf = weakSelf;
+                    [strongSelf toastMsg:success ? @"GIF 保存成功" : @"GIF 保存失败"];
+                    if (!success) [strongSelf deleteTempFile:gifUrl];
                 }];
             } else {
                 [self toastMsg:@"视频转码失败"];
