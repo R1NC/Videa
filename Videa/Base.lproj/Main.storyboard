@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hkh-RI-0zq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hkh-RI-0zq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,56 +58,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-39-Ewe">
-                                <rect key="frame" x="76" y="103" width="323" height="35"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入链接" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-39-Ewe">
+                                <rect key="frame" x="15" y="103" width="384" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Ifs-aw-VzT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
-                                <connections>
-                                    <action selector="didEndEditUrl:" destination="DFw-f4-4xt" eventType="editingDidEnd" id="9oE-De-VMm"/>
-                                </connections>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="链接：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQ5-aS-rZt">
-                                <rect key="frame" x="15" y="103" width="46" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="drh-ot-38A"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-CD-2tq">
-                                <rect key="frame" x="15" y="153" width="384" height="649"/>
+                                <rect key="frame" x="15" y="153" width="384" height="694"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4I-SJ-F6q">
-                                <rect key="frame" x="15" y="817" width="384" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="DzK-Ok-pLi"/>
-                                </constraints>
-                                <state key="normal" title="下载"/>
-                                <connections>
-                                    <action selector="onClickBtnDownload:" destination="DFw-f4-4xt" eventType="touchUpInside" id="SXg-gl-R8x"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="p4I-SJ-F6q" secondAttribute="bottom" constant="15" id="0UK-bt-LmB"/>
-                            <constraint firstItem="p4I-SJ-F6q" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="15" id="2Kb-Sb-tIy"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="15" id="6oX-ZW-hg5"/>
                             <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="FJF-mk-bK3"/>
-                            <constraint firstItem="p4I-SJ-F6q" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="GxJ-ns-udL"/>
-                            <constraint firstItem="EQ5-aS-rZt" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="15" id="V8Y-8B-rgG"/>
-                            <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="EQ5-aS-rZt" secondAttribute="trailing" constant="15" id="Wpx-YC-TTO"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="p4I-SJ-F6q" secondAttribute="trailing" constant="15" id="bpS-pb-pqw"/>
-                            <constraint firstItem="EQ5-aS-rZt" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="q8Q-o8-noq"/>
-                            <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="EQ5-aS-rZt" secondAttribute="trailing" constant="15" id="qiD-7M-wV0"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="15" id="cmg-kz-q6j"/>
+                            <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="15" id="mYd-hr-bj0"/>
                             <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="15" id="sk1-RC-hEt"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="15" id="syC-LA-ddG"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="15" id="yij-Eq-9Wf"/>
@@ -116,7 +88,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="下载 m3u8" id="j7J-Up-E65"/>
                     <connections>
-                        <outlet property="btnDownload" destination="p4I-SJ-F6q" id="kOM-34-VHD"/>
                         <outlet property="tvInfo" destination="xAr-CD-2tq" id="Pz6-5B-gvr"/>
                         <outlet property="tvUrl" destination="eGU-39-Ewe" id="Pl2-ng-UV2"/>
                     </connections>

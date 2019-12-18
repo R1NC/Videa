@@ -10,7 +10,9 @@
 #import "Toast.h"
 #import "UIUtil.h"
 
-@interface M3u8VC ()
+@interface M3u8VC ()<UITextFieldDelegate>
+
+@property(nonatomic,assign) NSUInteger pasteboardChangeCount;
 
 @end
 
@@ -19,16 +21,60 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     SetTapCallback(self.view, @selector(onTapRoot));
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardRemovedNotification object:[UIPasteboard generalPasteboard]];
+    _tvUrl.delegate = self;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if ([self checkUrlString:textField.text]) {
+        [textField resignFirstResponder];
+        [self download];
+    } else {
+        [self toastMsg:@"请输入合法的链接"];
+        textField.text = nil;
+    }
+    return NO;
+}
+
+- (void)pasteboardChangedNotification:(NSNotification*)notification {
+    UIPasteboard* pb = [UIPasteboard generalPasteboard];
+    _pasteboardChangeCount = pb.changeCount;
+    if (pb.strings && pb.strings.count > 0 && pb.strings.firstObject && pb.strings.firstObject.length > 0) {
+        if ([self checkUrlString:pb.strings.firstObject]) {
+            _tvUrl.text = pb.strings.firstObject;
+            [self toastMsg:@"已从剪贴板读取刚复制的链接"];
+            [_tvUrl resignFirstResponder];
+            [self download];
+        }
+    }
+}
+
+-(BOOL)checkUrlString:(NSString*)str {
+    if (!str || str.length == 0) return NO;
+    NSURL* url = [NSURL URLWithString:str];
+    return url && url.scheme && url.host;
+}
+
+-(void)willResignActive {
+    _pasteboardChangeCount = [UIPasteboard generalPasteboard].changeCount;
+    [super willResignActive];
+}
+
+-(void)didBecomeActive {
+    [super didBecomeActive];
+    if (_pasteboardChangeCount < [UIPasteboard generalPasteboard].changeCount) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
+    }
 }
 
 -(void)onTapRoot {
     [_tvUrl resignFirstResponder];
 }
 
-- (IBAction)onClickBtnDownload:(id)sender {
-    _btnDownload.enabled = NO;
-    _tvUrl.enabled = NO;
+- (void)download {
     __block NSString* url = _tvUrl.text;
+    _tvUrl.enabled = NO;
     if ([url rangeOfString:@".m3u8"].location == NSNotFound) {
         [self runTask:^{
             NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil];
@@ -54,10 +100,6 @@
     } else {
         [self downloadM3u8:url];
     }
-}
-
-- (IBAction)didEndEditUrl:(id)sender {
-    _btnDownload.enabled = _tvUrl.text && _tvUrl.text.length > 0;
 }
 
 /*
@@ -98,7 +140,6 @@
 -(void)toastMsg:(NSString*)msg {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[Toast shared] showText:msg];
-        self.btnDownload.enabled = YES;
         self.tvUrl.enabled = YES;
     });
 }

@@ -6,9 +6,9 @@
 //  Copyright © 2019 RINC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseVC.h"
 
-@interface MainVC : UIViewController
+@interface MainVC : BaseVC
 
 
 @end

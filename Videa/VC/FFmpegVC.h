@@ -6,11 +6,11 @@
 //  Copyright © 2019 RINC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseVC.h"
 #import <Photos/Photos.h>
 #import <mobileffmpeg/MobileFFmpeg.h>
 
-@interface FFmpegVC : UIViewController
+@interface FFmpegVC : BaseVC
 
 -(void)selctVideoFromPhotoLibrary;
 
