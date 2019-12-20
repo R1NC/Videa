@@ -10,6 +10,9 @@
 #import "Toast.h"
 #import "UIUtil.h"
 
+#define FONT_FILE_NAME @"ArialUnicodeMS.ttf"
+#define TEMP_FONT_FILE_PATH [NSTemporaryDirectory() stringByAppendingPathComponent:FONT_FILE_NAME]
+
 @interface Video2GifVC ()
 
 @property(nonatomic,strong) MediaInformation* mediaInfo;
@@ -29,7 +32,7 @@
 }
 
 -(void)onTapRoot {
-    [_tvFrameRate resignFirstResponder];
+    [_tvText resignFirstResponder];
 }
 
 - (IBAction)onClickBtnSelect:(id)sender {
@@ -37,11 +40,7 @@
 }
 
 - (IBAction)onClickBtnTransform:(id)sender {
-    if (_tvFrameRate.text && _tvFrameRate.text.integerValue > 0) {
-        [self transformWithFrameRate:_tvFrameRate.text.integerValue];
-    } else {
-        [self toastMsg:@"帧率必须大于0"];
-    }
+    [self transformWithText:_tvText.text];
 }
 
 /*
@@ -67,13 +66,21 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
--(void)transformWithFrameRate:(NSInteger)frameRate {
+-(void)transformWithText:(NSString*)text {
     _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;
-    _tvFrameRate.enabled = NO;
+    _tvText.enabled = NO;
     [self runTask:^{
         NSString* gifUrl = [self tempFileUrlOfExt:@"gif"];
-        NSString* cmd = [NSString stringWithFormat:@"-i %@ -r %ld %@", self.mediaInfo.getPath, frameRate, gifUrl];
+        [self checkFontFile];
+        NSMutableArray* cmd = [NSMutableArray arrayWithArray:@[
+            @"-i", self.mediaInfo.getPath,
+        ]];
+        if (text && text.length > 0) {
+            [cmd addObject:@"-vf"];
+            [cmd addObject:[NSString stringWithFormat:@"drawtext=text=%@: fontfile=%@: fontcolor=white: fontsize=100: shadowcolor=black@0.5: shadowx=2: shadowy=2: x=(w-text_w)/2: y=(h-text_h*2)", text, TEMP_FONT_FILE_PATH]];
+        }
+        [cmd addObject:gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
                 __weak typeof(self) weakSelf = self;
@@ -90,6 +97,14 @@
     }];
 }
 
+-(void)checkFontFile {
+    NSFileManager* fm = [NSFileManager defaultManager];
+    if (![fm fileExistsAtPath:TEMP_FONT_FILE_PATH]) {
+        NSString* bundleFontFile = [[NSBundle mainBundle] pathForResource:FONT_FILE_NAME ofType:nil];
+        [fm copyItemAtPath:bundleFontFile toPath:TEMP_FONT_FILE_PATH error:nil];
+    }
+}
+
 -(void)deleteTempVideoFile {
     if (_mediaInfo && _mediaInfo.getPath && _mediaInfo.getPath.length > 0) {
         [self deleteTempFile:_mediaInfo.getPath];
@@ -101,7 +116,7 @@
         [[Toast shared] showText:msg];
         self.btnSelectVideo.enabled = YES;
         self.btnTransform.enabled = YES;
-        self.tvFrameRate.enabled = YES;
+        self.tvText.enabled = YES;
     });
 }
 

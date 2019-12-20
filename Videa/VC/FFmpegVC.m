@@ -62,10 +62,10 @@
     }
 }
 
--(void)exeFFmpegCommand:(NSString *)cmd handler:(void(^)(BOOL))handler {
-    if (cmd && cmd.length > 0) {
+-(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler {
+    if (cmd && cmd.count > 0) {
         _isWorking = YES;
-        [MobileFFmpeg execute:cmd];
+        [MobileFFmpeg executeWithArguments:cmd];
         int rc = [MobileFFmpeg getLastReturnCode];
         NSString *output = [MobileFFmpeg getLastCommandOutput];
         BOOL success = rc == RETURN_CODE_SUCCESS;

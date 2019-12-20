@@ -22,7 +22,7 @@
 
 -(void)deleteTempFile:(NSString*)filePath;
 
--(void)exeFFmpegCommand:(NSString *)cmd handler:(void(^)(BOOL))handler;
+-(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler;
 
 -(void)addPhotoLibraryResourceUrl:(NSString*)url type:(PHAssetResourceType)type handler:(void(^)(BOOL))handler;
 

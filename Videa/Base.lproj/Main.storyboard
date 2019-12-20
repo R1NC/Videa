@@ -124,23 +124,14 @@
                                     <action selector="onClickBtnSelect:" destination="M1l-wi-EeI" eventType="touchUpInside" id="48H-AL-ZIj"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="15" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4VX-rA-9iA">
-                                <rect key="frame" x="76" y="767" width="323" height="35"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入文案.." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4VX-rA-9iA">
+                                <rect key="frame" x="15" y="767" width="384" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="D2J-fO-JND"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帧率：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HC5-kV-m2h">
-                                <rect key="frame" x="15" y="767" width="46" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="hsc-RL-EOh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hO-dz-ve1">
                                 <rect key="frame" x="15" y="148" width="384" height="604"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -154,17 +145,15 @@
                             <constraint firstItem="XSi-yn-wqP" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="4qa-hD-tmm"/>
                             <constraint firstItem="0hO-dz-ve1" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="60d-lr-z5y"/>
                             <constraint firstItem="4VX-rA-9iA" firstAttribute="top" secondItem="0hO-dz-ve1" secondAttribute="bottom" constant="15" id="7C3-yf-AwE"/>
-                            <constraint firstItem="4VX-rA-9iA" firstAttribute="leading" secondItem="HC5-kV-m2h" secondAttribute="trailing" constant="15" id="7Vq-IF-eWn"/>
                             <constraint firstItem="XSi-yn-wqP" firstAttribute="top" secondItem="4VX-rA-9iA" secondAttribute="bottom" constant="15" id="Cth-CC-QS7"/>
                             <constraint firstItem="o57-hT-lhP" firstAttribute="top" secondItem="m2a-f6-qcm" secondAttribute="top" constant="15" id="Eke-gt-t7F"/>
                             <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="0hO-dz-ve1" secondAttribute="trailing" constant="15" id="L4y-Ds-Ya1"/>
                             <constraint firstItem="m2a-f6-qcm" firstAttribute="bottom" secondItem="XSi-yn-wqP" secondAttribute="bottom" constant="15" id="Ouo-nV-XJB"/>
                             <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="4VX-rA-9iA" secondAttribute="trailing" constant="15" id="TuV-9J-kdI"/>
                             <constraint firstItem="o57-hT-lhP" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="U3m-TE-tT9"/>
+                            <constraint firstItem="4VX-rA-9iA" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="Ya5-84-BIC"/>
                             <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="o57-hT-lhP" secondAttribute="trailing" constant="15" id="ivn-tL-RaB"/>
-                            <constraint firstItem="XSi-yn-wqP" firstAttribute="top" secondItem="HC5-kV-m2h" secondAttribute="bottom" constant="15" id="krJ-b3-Fkb"/>
                             <constraint firstItem="0hO-dz-ve1" firstAttribute="top" secondItem="o57-hT-lhP" secondAttribute="bottom" constant="15" id="nGH-O7-RSX"/>
-                            <constraint firstItem="HC5-kV-m2h" firstAttribute="leading" secondItem="m2a-f6-qcm" secondAttribute="leading" constant="15" id="ooY-YA-KGr"/>
                             <constraint firstItem="m2a-f6-qcm" firstAttribute="trailing" secondItem="XSi-yn-wqP" secondAttribute="trailing" constant="15" id="tzL-4P-dVR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m2a-f6-qcm"/>
@@ -173,8 +162,8 @@
                     <connections>
                         <outlet property="btnSelectVideo" destination="o57-hT-lhP" id="7zN-of-dQU"/>
                         <outlet property="btnTransform" destination="XSi-yn-wqP" id="eT0-Pg-hZg"/>
-                        <outlet property="tvFrameRate" destination="4VX-rA-9iA" id="E4X-yk-WXf"/>
                         <outlet property="tvInfo" destination="0hO-dz-ve1" id="Enn-0J-qqf"/>
+                        <outlet property="tvText" destination="4VX-rA-9iA" id="fPw-PE-npl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tU3-ou-znE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

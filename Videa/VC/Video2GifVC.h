@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Video2GifVC : FFmpegVC
-@property (strong, nonatomic) IBOutlet UITextField *tvFrameRate;
+@property (strong, nonatomic) IBOutlet UITextField *tvText;
 @property (strong, nonatomic) IBOutlet UIButton *btnTransform;
 @property (strong, nonatomic) IBOutlet UIButton *btnSelectVideo;
 @property (strong, nonatomic) IBOutlet UITextView *tvInfo;

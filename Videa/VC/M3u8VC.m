@@ -126,7 +126,12 @@
 -(void)downloadM3u8:(NSString*)m3u8 {
     [self runTask:^{
         NSString* mp4Url = [self tempFileUrlOfExt:@"mp4"];
-        NSString* cmd = [NSString stringWithFormat:@"-protocol_whitelist file,http,https,tcp,tls,crypto -i \"%@\" -c copy %@", m3u8, mp4Url];
+        NSArray* cmd = @[
+            @"-i", m3u8,
+            @"-protocol_whitelist", @"file,http,https,tcp,tls,crypto",
+            @"-c", @"copy",
+            mp4Url
+        ];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
                 __weak typeof(self) weakSelf = self;
