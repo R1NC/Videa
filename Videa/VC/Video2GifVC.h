@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UIButton *btnTransform;
 @property (strong, nonatomic) IBOutlet UIButton *btnSelectVideo;
 @property (strong, nonatomic) IBOutlet UITextView *tvInfo;
+@property (strong, nonatomic) IBOutlet UITextField *tfColor;
+@property (strong, nonatomic) IBOutlet UITextField *tfSize;
 
 @end
 

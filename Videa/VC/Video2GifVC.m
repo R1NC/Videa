@@ -10,7 +10,7 @@
 #import "Toast.h"
 #import "UIUtil.h"
 
-#define FONT_FILE_NAME @"ArialUnicodeMS.ttf"
+#define FONT_FILE_NAME @"SourceHanSerifSC-Bold.otf"
 #define TEMP_FONT_FILE_PATH [NSTemporaryDirectory() stringByAppendingPathComponent:FONT_FILE_NAME]
 
 @interface Video2GifVC ()
@@ -23,7 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    SetTapCallback(self.view, @selector(onTapRoot));
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -31,16 +30,39 @@
     [super viewDidDisappear:animated];
 }
 
--(void)onTapRoot {
-    [_tvText resignFirstResponder];
-}
-
 - (IBAction)onClickBtnSelect:(id)sender {
     [self selctVideoFromPhotoLibrary];
 }
 
 - (IBAction)onClickBtnTransform:(id)sender {
-    [self transformWithText:_tvText.text];
+    if (_tvText.text && _tvText.text.length > 0) {
+        if (!_tfColor.text || _tfColor.text.length == 0) {
+            [self toastMsg:@"请输入文字颜色"];
+            return;
+        }
+        if (_tfColor.text.length != 6) {
+            [self toastMsg:@"文字颜色必须是6位16进制RGB"];
+            return;
+        }
+        for (int i = 0; i < _tfColor.text.length; i++) {
+            char c = [_tfColor.text characterAtIndex:i];
+            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f')) {
+                continue;
+            } else {
+                [self toastMsg:@"文字颜色必须是6位16进制RGB"];
+                return;
+            }
+        }
+        if (!_tfSize.text || _tfSize.text.length == 0) {
+            [self toastMsg:@"请输入文字大小"];
+            return;
+        }
+        if (!_tfSize.text || _tfSize.text.intValue == 0) {
+            [self toastMsg:@"文字大小必须大于0"];
+            return;
+        }
+    }
+    [self transformWithText:_tvText.text color:_tfColor.text size:_tfSize.text.intValue];
 }
 
 /*
@@ -66,7 +88,7 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
--(void)transformWithText:(NSString*)text {
+-(void)transformWithText:(NSString*)text color:(NSString*)color size:(int)size {
     _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;
     _tvText.enabled = NO;
@@ -78,7 +100,7 @@
         ]];
         if (text && text.length > 0) {
             [cmd addObject:@"-vf"];
-            [cmd addObject:[NSString stringWithFormat:@"drawtext=text=%@: fontfile=%@: fontcolor=white: fontsize=100: shadowcolor=black@0.5: shadowx=2: shadowy=2: x=(w-text_w)/2: y=(h-text_h*2)", text, TEMP_FONT_FILE_PATH]];
+            [cmd addObject:[NSString stringWithFormat:@"drawtext=text=%@: fontfile=%@: fontcolor=#%@: fontsize=%d: shadowcolor=black@0.5: shadowx=2: shadowy=2: x=(w-text_w)/2: y=(h-text_h*2)", text, TEMP_FONT_FILE_PATH, color, size]];
         }
         [cmd addObject:gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {

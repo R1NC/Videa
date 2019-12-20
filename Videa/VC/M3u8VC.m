@@ -20,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    SetTapCallback(self.view, @selector(onTapRoot));
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardRemovedNotification object:[UIPasteboard generalPasteboard]];
     _tvUrl.delegate = self;
@@ -34,7 +33,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([self checkUrlString:textField.text]) {
-        [textField resignFirstResponder];
+        [self.view endEditing:YES];
         [self download];
     } else {
         [self toastMsg:@"请输入合法的链接"];
@@ -50,7 +49,7 @@
         if ([self checkUrlString:pb.strings.firstObject]) {
             _tvUrl.text = pb.strings.firstObject;
             [self toastMsg:@"已从剪贴板读取刚复制的链接"];
-            [_tvUrl resignFirstResponder];
+            [self.view endEditing:YES];
             [self download];
         }
     }
@@ -72,10 +71,6 @@
     if (_pasteboardChangeCount < [UIPasteboard generalPasteboard].changeCount) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
     }
-}
-
--(void)onTapRoot {
-    [_tvUrl resignFirstResponder];
 }
 
 - (void)download {

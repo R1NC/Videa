@@ -7,6 +7,7 @@
 //
 
 #import "BaseVC.h"
+#import "UIUtil.h"
 
 @interface BaseVC ()
 
@@ -20,6 +21,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    SetTapCallback(self.view, @selector(onTapRoot));
+}
+
+-(void)onTapRoot {
+    [self.view endEditing:YES];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
