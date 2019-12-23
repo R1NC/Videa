@@ -23,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _tvInfo.clipsToBounds = YES;
+    _tvInfo.layer.cornerRadius = 6.f;
     [self setKeyBoardBgViewHeight:0];
 }
 
