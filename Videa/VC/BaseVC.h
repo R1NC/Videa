@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)willEnterForeground;
 
+- (void)keyboardDidShow:(CGRect)frame;
+
+- (void)keyboardDidHide;
+
 @end
 
 NS_ASSUME_NONNULL_END

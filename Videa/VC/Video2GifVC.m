@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setKeyBoardBgViewHeight:0];
 }
 
 -(void)viewDidDisappear:(BOOL)animated {
@@ -92,6 +93,14 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
+- (void)keyboardDidShow:(CGRect)frame {
+    [self setKeyBoardBgViewHeight:frame.size.height];
+}
+
+- (void)keyboardDidHide {
+    [self setKeyBoardBgViewHeight:0];
+}
+
 -(void)transformWithText:(NSString*)text color:(NSString*)color size:(int)size frameRate:(int)frameRate {
     _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;
@@ -145,6 +154,10 @@
         self.btnTransform.enabled = YES;
         self.tvText.enabled = YES;
     });
+}
+
+-(void)setKeyBoardBgViewHeight:(CGFloat)height {
+    self.constraintHeightOfBottomView.constant = height;
 }
 
 @end

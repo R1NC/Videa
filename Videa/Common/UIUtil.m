@@ -79,21 +79,6 @@ static NSTimeInterval lastClick;
     v.layer.cornerRadius = radius;
 }
 
-+(float)keyboardAnimDuration:(NSNotification*)notification {
-    id keyBoardDurationValue = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    return [keyBoardDurationValue floatValue];
-}
-
-+(float)keyboardFrameBeginY:(NSNotification *)notification {
-    NSValue *kv = [[notification userInfo]objectForKey:UIKeyboardFrameBeginUserInfoKey];
-    return [kv CGRectValue].origin.y;
-}
-
-+(float)keyboardFrameEndY:(NSNotification *)notification {
-    NSValue *kv = [[notification userInfo]objectForKey:UIKeyboardFrameEndUserInfoKey];
-    return [kv CGRectValue].origin.y;
-}
-
 +(UIVisualEffectView*)blurViewWithFrame:(CGRect)frame {
     UIVisualEffectView* blurEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
     blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

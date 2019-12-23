@@ -93,12 +93,6 @@ v.exclusiveTouch = YES;\
 
 +(void)addShadowToView:(UIView*)v bgColor:(UIColor*)bgColor cornerRadius:(float)radius;
 
-+(float)keyboardAnimDuration:(NSNotification*)notification;
-
-+(float)keyboardFrameBeginY:(NSNotification *)notification;
-
-+(float)keyboardFrameEndY:(NSNotification *)notification;
-
 +(UIVisualEffectView*)blurViewWithFrame:(CGRect)fram;
 
 +(BOOL)checkClick;

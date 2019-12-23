@@ -17,10 +17,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActiveN:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActiveN:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForegroundN:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackgroundN:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowN:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideN:) name:UIKeyboardDidHideNotification object:nil];
     SetTapCallback(self.view, @selector(onTapRoot));
 }
 
@@ -28,25 +30,35 @@
     [self.view endEditing:YES];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+-(void)viewDidDisappearN:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidDisappear:animated];
 }
 
-- (void)didBecomeActive:(NSNotification *)notification {
+- (void)didBecomeActiveN:(NSNotification *)notification {
     [self didBecomeActive];
 }
 
-- (void)willResignActive:(NSNotification *)notification {
+- (void)willResignActiveN:(NSNotification *)notification {
     [self willResignActive];
 }
 
-- (void)didEnterBackground:(NSNotification *)notification {
+- (void)didEnterBackgroundN:(NSNotification *)notification {
     [self didEnterBackground];
 }
 
-- (void)willEnterForeground:(NSNotification *)notification {
+- (void)willEnterForegroundN:(NSNotification *)notification {
     [self willEnterForeground];
+}
+
+- (void)keyboardDidShowN:(NSNotification *)notification {
+    NSValue *value = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrame = [self.view convertRect:[value CGRectValue] fromView:nil];
+    [self keyboardDidShow:keyboardFrame];
+}
+
+- (void)keyboardDidHideN:(NSNotification *)notification {
+    [self keyboardDidHide];
 }
 
 - (void)didBecomeActive {}
@@ -56,6 +68,10 @@
 - (void)didEnterBackground {}
 
 - (void)willEnterForeground {}
+
+- (void)keyboardDidShow:(CGRect)frame {}
+
+- (void)keyboardDidHide {}
 
 /*
 #pragma mark - Navigation

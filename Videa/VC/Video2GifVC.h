@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UITextField *tfColor;
 @property (strong, nonatomic) IBOutlet UITextField *tfSize;
 @property (strong, nonatomic) IBOutlet UITextField *tfFrameRate;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintHeightOfBottomView;
 
 @end
 
