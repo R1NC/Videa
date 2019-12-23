@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UITextView *tvInfo;
 @property (strong, nonatomic) IBOutlet UITextField *tfColor;
 @property (strong, nonatomic) IBOutlet UITextField *tfSize;
+@property (strong, nonatomic) IBOutlet UITextField *tfFrameRate;
 
 @end
 

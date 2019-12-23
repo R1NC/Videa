@@ -35,6 +35,10 @@
 }
 
 - (IBAction)onClickBtnTransform:(id)sender {
+    if (!_tfFrameRate.text || _tfFrameRate.text.length == 0 || _tfFrameRate.text.intValue == 0) {
+        [self toastMsg:@"请输入帧率"];
+        return;
+    }
     if (_tvText.text && _tvText.text.length > 0) {
         if (!_tfColor.text || _tfColor.text.length == 0) {
             [self toastMsg:@"请输入文字颜色"];
@@ -62,7 +66,7 @@
             return;
         }
     }
-    [self transformWithText:_tvText.text color:_tfColor.text size:_tfSize.text.intValue];
+    [self transformWithText:_tvText.text color:_tfColor.text size:_tfSize.text.intValue frameRate:_tfFrameRate.text.intValue];
 }
 
 /*
@@ -88,7 +92,7 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
--(void)transformWithText:(NSString*)text color:(NSString*)color size:(int)size {
+-(void)transformWithText:(NSString*)text color:(NSString*)color size:(int)size frameRate:(int)frameRate {
     _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;
     _tvText.enabled = NO;
@@ -97,6 +101,7 @@
         [self checkFontFile];
         NSMutableArray* cmd = [NSMutableArray arrayWithArray:@[
             @"-i", self.mediaInfo.getPath,
+            @"-r", [NSString stringWithFormat:@"%d", frameRate]
         ]];
         if (text && text.length > 0) {
             [cmd addObject:@"-vf"];
