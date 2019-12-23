@@ -95,6 +95,14 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
+- (void)keyboardWillShow:(CGRect)frame {
+    [self setKeyBoardBgViewHeight:frame.size.height];
+}
+
+- (void)keyboardWillHide {
+    [self setKeyBoardBgViewHeight:0];
+}
+
 - (void)keyboardDidShow:(CGRect)frame {
     [self setKeyBoardBgViewHeight:frame.size.height];
 }
@@ -160,6 +168,7 @@
 
 -(void)setKeyBoardBgViewHeight:(CGFloat)height {
     self.constraintHeightOfBottomView.constant = height;
+    [self.view setNeedsUpdateConstraints];
 }
 
 @end

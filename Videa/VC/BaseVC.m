@@ -21,6 +21,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActiveN:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForegroundN:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackgroundN:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowN:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideN:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowN:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideN:) name:UIKeyboardDidHideNotification object:nil];
     SetTapCallback(self.view, @selector(onTapRoot));
@@ -51,6 +53,16 @@
     [self willEnterForeground];
 }
 
+- (void)keyboardWillShowN:(NSNotification *)notification {
+    NSValue *value = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrame = [self.view convertRect:[value CGRectValue] fromView:nil];
+    [self keyboardWillShow:keyboardFrame];
+}
+
+- (void)keyboardWillHideN:(NSNotification *)notification {
+    [self keyboardWillHide];
+}
+
 - (void)keyboardDidShowN:(NSNotification *)notification {
     NSValue *value = notification.userInfo[UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardFrame = [self.view convertRect:[value CGRectValue] fromView:nil];
@@ -68,6 +80,10 @@
 - (void)didEnterBackground {}
 
 - (void)willEnterForeground {}
+
+- (void)keyboardWillShow:(CGRect)frame {}
+
+- (void)keyboardWillHide {}
 
 - (void)keyboardDidShow:(CGRect)frame {}
 
