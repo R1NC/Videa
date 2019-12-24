@@ -32,6 +32,7 @@
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     _avpVC = [AVPlayerViewController new];
     _avpVC.allowsPictureInPicturePlayback = YES;
+    [self setKeyBoardBgViewHeight:0];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
