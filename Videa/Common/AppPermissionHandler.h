@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void)checkPhotoLibraryWithHandler:(void(^)(BOOL))handler;
 
++(void)checkCameraWithHandler:(void(^)(BOOL))handler landscape:(BOOL)landscape;
+
++(void)checkRecordWithHandler:(void(^)(BOOL))handler landscape:(BOOL)landscape;
+
 @end
 
 NS_ASSUME_NONNULL_END

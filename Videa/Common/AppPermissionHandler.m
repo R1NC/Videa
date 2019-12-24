@@ -8,6 +8,7 @@
 
 #import "AppPermissionHandler.h"
 #import <Photos/Photos.h>
+#import <AVFoundation/AVFoundation.h>
 #import "UIAlertController+Window.h"
 #import "SystemSettings.h"
 
@@ -34,9 +35,36 @@
     }
 }
 
++(void)checkCameraWithHandler:(void(^)(BOOL))handler landscape:(BOOL)landscape {
+    [self checkCapturePermissionWithType:AVMediaTypeVideo handler:handler landscape:landscape];
+}
+
++(void)checkRecordWithHandler:(void(^)(BOOL))handler landscape:(BOOL)landscape {
+    [self checkCapturePermissionWithType:AVMediaTypeAudio handler:handler landscape:landscape];
+}
+
++(void)checkCapturePermissionWithType:(AVMediaType)type handler:(void(^)(BOOL))handler landscape:(BOOL)landscape {
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:type];
+    if (authStatus == AVAuthorizationStatusAuthorized) {
+        [self callHandler:handler result:YES];
+    } else if (authStatus == AVAuthorizationStatusDenied) {
+        NSString* p = type == AVMediaTypeAudio ? @"麦克风" : @"相机";
+        [self alertWithPermission:p landscape:landscape handler:handler];
+    } else {
+        [AVCaptureDevice requestAccessForMediaType:type completionHandler:^(BOOL granted) {
+            if (granted) {
+                [self callHandler:handler result:YES];
+            } else {
+                NSString* p = type == AVMediaTypeAudio ? @"麦克风" : @"相机";
+                [self alertWithPermission:p landscape:landscape handler:handler];
+            }
+        }];
+    }
+}
+
 +(void)alertWithPermission:(NSString*)permission landscape:(BOOL)landscape handler:(void(^)(BOOL))handler {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"\"Videa\"无%@访问权限", permission] message:@"请前往设置开启" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"无%@访问权限", permission] message:@"请前往设置开启" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [SystemSettings myApp];
             [self callHandler:handler result:NO];
