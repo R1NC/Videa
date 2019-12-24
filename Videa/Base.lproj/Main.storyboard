@@ -27,7 +27,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idG-N2-DUa">
                                 <rect key="frame" x="15" y="148" width="384" height="30"/>
-                                <state key="normal" title="下载 m3u8"/>
+                                <state key="normal" title="m3u8 播放/下载"/>
                                 <connections>
                                     <segue destination="DFw-f4-4xt" kind="show" id="9P4-I2-NMi"/>
                                 </connections>
@@ -50,10 +50,10 @@
             </objects>
             <point key="canvasLocation" x="303" y="65"/>
         </scene>
-        <!--下载 m3u8-->
+        <!--m3u8 播放/下载-->
         <scene sceneID="C77-LV-qup">
             <objects>
-                <viewController title="下载 m3u8" id="DFw-f4-4xt" customClass="M3u8VC" sceneMemberID="viewController">
+                <viewController title="m3u8 播放/下载" id="DFw-f4-4xt" customClass="M3u8VC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wqM-Q0-OBc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +132,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kCI-HC-OQV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="下载 m3u8" id="j7J-Up-E65"/>
+                    <navigationItem key="navigationItem" title="m3u8 播放/下载" id="j7J-Up-E65"/>
                     <connections>
                         <outlet property="btnDownload" destination="YNk-rI-6KR" id="TpW-U7-lYN"/>
                         <outlet property="btnPlay" destination="Rop-7F-fjm" id="f3b-Bq-zrS"/>
