@@ -103,14 +103,6 @@
     [self setKeyBoardBgViewHeight:0];
 }
 
-- (void)keyboardDidShow:(CGRect)frame {
-    [self setKeyBoardBgViewHeight:frame.size.height];
-}
-
-- (void)keyboardDidHide {
-    [self setKeyBoardBgViewHeight:0];
-}
-
 -(void)transformWithText:(NSString*)text color:(NSString*)color size:(int)size frameRate:(int)frameRate {
     _btnSelectVideo.enabled = NO;
     _btnTransform.enabled = NO;

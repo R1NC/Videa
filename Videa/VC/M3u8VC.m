@@ -9,10 +9,14 @@
 #import "M3u8VC.h"
 #import "Toast.h"
 #import "UIUtil.h"
+#import<AVKit/AVKit.h>
+#import<AVFoundation/AVFoundation.h>
 
 @interface M3u8VC ()<UITextFieldDelegate>
 
 @property(nonatomic,assign) NSUInteger pasteboardChangeCount;
+@property(nonatomic,strong) AVPlayerViewController* avpVC;
+@property(nonatomic,strong) NSString* m3u8Url;
 
 @end
 
@@ -26,6 +30,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardRemovedNotification object:[UIPasteboard generalPasteboard]];
     _tvUrl.delegate = self;
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    _avpVC = [AVPlayerViewController new];
+    _avpVC.allowsPictureInPicturePlayback = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -34,13 +40,12 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if ([self checkUrlString:textField.text]) {
-        [self.view endEditing:YES];
-        [self download];
-    } else {
-        [self toastMsg:@"请输入合法的链接"];
-        textField.text = nil;
-    }
+    [self checkM3u8Url:textField.text handler:^(BOOL valid) {
+        if (!valid) {
+            [self toastMsg:@"链接不合法或者没有找到 m3u8 资源"];
+            textField.text = nil;
+        }
+    }];
     return NO;
 }
 
@@ -48,19 +53,17 @@
     UIPasteboard* pb = [UIPasteboard generalPasteboard];
     _pasteboardChangeCount = pb.changeCount;
     if (pb.strings && pb.strings.count > 0 && pb.strings.firstObject && pb.strings.firstObject.length > 0) {
-        if ([self checkUrlString:pb.strings.firstObject]) {
-            _tvUrl.text = pb.strings.firstObject;
-            [self toastMsg:@"已从剪贴板读取刚复制的链接"];
-            [self.view endEditing:YES];
-            [self download];
-        }
+        [self checkM3u8Url:pb.strings.firstObject handler:^(BOOL valid) {
+        }];
     }
 }
 
--(BOOL)checkUrlString:(NSString*)str {
-    if (!str || str.length == 0) return NO;
-    NSURL* url = [NSURL URLWithString:str];
-    return url && url.scheme && url.host;
+- (IBAction)onClickBtnPlay:(id)sender {
+    [self playM3u8];
+}
+
+- (IBAction)onClickBtnDownload:(id)sender {
+    [self downloadM3u8];
 }
 
 -(void)willResignActive {
@@ -75,34 +78,12 @@
     }
 }
 
-- (void)download {
-    __block NSString* url = _tvUrl.text;
-    _tvUrl.enabled = NO;
-    if ([url rangeOfString:@".m3u8"].location == NSNotFound) {
-        [self runTask:^{
-            NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil];
-            if (html && html.length > 0) {
-                NSRange rangeM3u8 = [html rangeOfString:@".m3u8"];
-                if (rangeM3u8.location != NSNotFound) {
-                    NSString* strEndWithM3u8 = [html substringToIndex:rangeM3u8.location + rangeM3u8.length];
-                    NSRange rangeHttpScheme = [strEndWithM3u8 rangeOfString:@"http://" options:NSBackwardsSearch];
-                    NSRange rangeHttpsScheme = [strEndWithM3u8 rangeOfString:@"https://" options:NSBackwardsSearch];
-                    if (rangeHttpScheme.location != NSNotFound) {
-                        url = [strEndWithM3u8 substringFromIndex:rangeHttpScheme.location];
-                    } else if (rangeHttpsScheme.location != NSNotFound) {
-                        url = [strEndWithM3u8 substringFromIndex:rangeHttpsScheme.location];
-                    }
-                    [self downloadM3u8:url];
-                    return;
-                }
-                [self toastMsg:@"该网页未发现m3u8资源"];
-            } else {
-                [self toastMsg:@"网页内容抓取失败"];
-            }
-        }];
-    } else {
-        [self downloadM3u8:url];
-    }
+- (void)keyboardWillShow:(CGRect)frame {
+    [self setKeyBoardBgViewHeight:frame.size.height];
+}
+
+- (void)keyboardWillHide {
+    [self setKeyBoardBgViewHeight:0];
 }
 
 /*
@@ -120,11 +101,66 @@
     [UIUtil textView:_tvInfo appendLine:log];
 }
 
--(void)downloadM3u8:(NSString*)m3u8 {
+-(void)checkM3u8Url:(NSString*)urlStr handler:(void(^)(BOOL))handler {
+    void(^validBlock)(NSString*) = ^(NSString* url) {
+        self.m3u8Url = url;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view endEditing:YES];
+            self.tvUrl.text = url;
+            self.avpVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
+            self.btnPlay.enabled = YES;
+            self.btnDownload.enabled = YES;
+        });
+        if (handler) handler(YES);
+    };
+    void(^invalidBlock)(void) = ^ {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.view endEditing:YES];
+            self.btnPlay.enabled = NO;
+            self.btnDownload.enabled = NO;
+        });
+        if (handler) handler(NO);
+    };
+    if (urlStr && urlStr.length > 0) {
+        NSURL* url = [NSURL URLWithString:urlStr];
+        if (url && url.scheme && url.host) {
+            if ([urlStr rangeOfString:@".m3u8"].location == NSNotFound) {
+                [self runTask:^{
+                    NSString* html = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlStr] encoding:NSUTF8StringEncoding error:nil];
+                    if (html && html.length > 0) {
+                        NSRange rangeM3u8 = [html rangeOfString:@".m3u8"];
+                        if (rangeM3u8.location != NSNotFound) {
+                            NSString* strEndWithM3u8 = [html substringToIndex:rangeM3u8.location + rangeM3u8.length];
+                            NSRange rangeHttpScheme = [strEndWithM3u8 rangeOfString:@"http://" options:NSBackwardsSearch];
+                            NSRange rangeHttpsScheme = [strEndWithM3u8 rangeOfString:@"https://" options:NSBackwardsSearch];
+                            NSString* newUrl = nil;
+                            if (rangeHttpScheme.location != NSNotFound) {
+                                newUrl = [strEndWithM3u8 substringFromIndex:rangeHttpScheme.location];
+                            } else if (rangeHttpsScheme.location != NSNotFound) {
+                                newUrl = [strEndWithM3u8 substringFromIndex:rangeHttpsScheme.location];
+                            }
+                            if (newUrl) {
+                                validBlock(newUrl);
+                            }
+                            return;
+                        }
+                    }
+                    invalidBlock();
+                }];
+            } else {
+                validBlock(urlStr);
+                return;
+            }
+        }
+    }
+    invalidBlock();
+}
+
+-(void)downloadM3u8 {
     [self runTask:^{
         NSString* mp4Url = [self tempFileUrlOfExt:@"mp4"];
         NSArray* cmd = @[
-            @"-i", m3u8,
+            @"-i", self.m3u8Url,
             @"-protocol_whitelist", @"file,http,https,tcp,tls,crypto",
             @"-c", @"copy",
             mp4Url
@@ -145,11 +181,21 @@
     }];
 }
 
+-(void)playM3u8 {
+    [_avpVC.player play];
+    [self presentViewController:_avpVC animated:YES completion:nil];
+}
+
 -(void)toastMsg:(NSString*)msg {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[Toast shared] showText:msg];
         self.tvUrl.enabled = YES;
     });
+}
+
+-(void)setKeyBoardBgViewHeight:(CGFloat)height {
+    self.constraintHeightOfBottomView.constant = height;
+    [self.view setNeedsUpdateConstraints];
 }
 
 @end

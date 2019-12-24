@@ -67,34 +67,83 @@
                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-CD-2tq">
-                                <rect key="frame" x="10" y="143" width="394" height="709"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <rect key="frame" x="10" y="178" width="394" height="654"/>
+                                <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="0.10276648116438356" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rop-7F-fjm">
+                                <rect key="frame" x="10" y="138" width="184" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="aiR-ho-ybU"/>
+                                </constraints>
+                                <state key="normal" title="播放"/>
+                                <connections>
+                                    <action selector="onClickBtnPlay:" destination="DFw-f4-4xt" eventType="touchUpInside" id="TJl-6U-WRY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNk-rI-6KR">
+                                <rect key="frame" x="220" y="138" width="184" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="MW7-Zb-FPX"/>
+                                </constraints>
+                                <state key="normal" title="下载"/>
+                                <connections>
+                                    <action selector="onClickBtnDownload:" destination="DFw-f4-4xt" eventType="touchUpInside" id="Po5-El-Rjc"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqh-nc-YPS">
+                                <rect key="frame" x="202" y="138" width="10" height="35"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="10" id="M7w-Ro-L6Z"/>
+                                    <constraint firstAttribute="height" constant="35" id="MOy-so-7Gi"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhf-Xc-ilT">
+                                <rect key="frame" x="0.0" y="842" width="414" height="20"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="41p-Cb-58o"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Rop-7F-fjm" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="0Qg-kJ-pBP"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="Rhf-Xc-ilT" secondAttribute="bottom" id="0Z3-1i-nKl"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="6oX-ZW-hg5"/>
+                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="Aqh-nc-YPS" secondAttribute="bottom" constant="5" id="9G0-gg-bIH"/>
+                            <constraint firstItem="Rop-7F-fjm" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="FFA-Dq-HqZ"/>
                             <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="FJF-mk-bK3"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="10" id="cmg-kz-q6j"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="YNk-rI-6KR" secondAttribute="trailing" constant="10" id="UqK-Zi-l8v"/>
+                            <constraint firstItem="Rhf-Xc-ilT" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" id="YVp-uk-pHd"/>
+                            <constraint firstItem="Aqh-nc-YPS" firstAttribute="leading" secondItem="Rop-7F-fjm" secondAttribute="trailing" constant="8" symbolic="YES" id="b8o-m4-Xwk"/>
+                            <constraint firstItem="Aqh-nc-YPS" firstAttribute="centerX" secondItem="wqM-Q0-OBc" secondAttribute="centerX" id="f9x-zU-nZL"/>
+                            <constraint firstItem="Aqh-nc-YPS" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="fcy-vA-K6s"/>
+                            <constraint firstItem="Rhf-Xc-ilT" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="10" id="fk2-NH-V6y"/>
+                            <constraint firstItem="YNk-rI-6KR" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="mTs-Kw-k1g"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="mYd-hr-bj0"/>
-                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="10" id="sk1-RC-hEt"/>
+                            <constraint firstItem="YNk-rI-6KR" firstAttribute="leading" secondItem="Aqh-nc-YPS" secondAttribute="trailing" constant="8" symbolic="YES" id="smA-eN-3o5"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="10" id="syC-LA-ddG"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="Rhf-Xc-ilT" secondAttribute="trailing" id="yNs-Tp-EhH"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="10" id="yij-Eq-9Wf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kCI-HC-OQV"/>
                     </view>
                     <navigationItem key="navigationItem" title="下载 m3u8" id="j7J-Up-E65"/>
                     <connections>
+                        <outlet property="btnDownload" destination="YNk-rI-6KR" id="TpW-U7-lYN"/>
+                        <outlet property="btnPlay" destination="Rop-7F-fjm" id="f3b-Bq-zrS"/>
+                        <outlet property="constraintHeightOfBottomView" destination="41p-Cb-58o" id="JNf-O0-Yzn"/>
                         <outlet property="tvInfo" destination="xAr-CD-2tq" id="Pz6-5B-gvr"/>
                         <outlet property="tvUrl" destination="eGU-39-Ewe" id="Pl2-ng-UV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1i-AL-f5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1052" y="766"/>
+            <point key="canvasLocation" x="1050.7246376811595" y="765.40178571428567"/>
         </scene>
         <!--视频 -> GIF-->
         <scene sceneID="pSO-nE-TRn">
@@ -134,8 +183,8 @@
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hO-dz-ve1">
                                 <rect key="frame" x="10" y="138" width="394" height="564"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="0.09891374143835617" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
