@@ -24,8 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _tvInfo.clipsToBounds = YES;
-    _tvInfo.layer.cornerRadius = 6.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pasteboardChangedNotification:) name:UIPasteboardRemovedNotification object:[UIPasteboard generalPasteboard]];
     _tvUrl.delegate = self;
