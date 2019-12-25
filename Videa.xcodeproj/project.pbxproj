@@ -16,10 +16,7 @@
 		80A4C17A23A33C550095C3A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80A4C17823A33C550095C3A5 /* LaunchScreen.storyboard */; };
 		80A4C17D23A33C550095C3A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C17C23A33C550095C3A5 /* main.m */; };
 		80A4C18523A347C40095C3A5 /* Video2GifVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C18423A347C40095C3A5 /* Video2GifVC.m */; };
-		80A4C18A23A368E40095C3A5 /* AppPermissionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C18923A368E40095C3A5 /* AppPermissionHandler.m */; };
-		80A4C18D23A36B0B0095C3A5 /* UIAlertController+Window.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C18B23A36B0B0095C3A5 /* UIAlertController+Window.m */; };
 		80A4C19023A36BCE0095C3A5 /* SystemSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C18E23A36BCE0095C3A5 /* SystemSettings.m */; };
-		80A4C19323A36C6E0095C3A5 /* UIDevice+TFDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19123A36C6E0095C3A5 /* UIDevice+TFDevice.m */; };
 		80A4C19623A866110095C3A5 /* Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19523A866110095C3A5 /* Toast.m */; };
 		80A4C19923A8665A0095C3A5 /* UIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19823A8665A0095C3A5 /* UIUtil.m */; };
 		80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19B23A8716C0095C3A5 /* FFmpegVC.m */; };
@@ -46,14 +43,8 @@
 		80A4C17C23A33C550095C3A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80A4C18323A347C40095C3A5 /* Video2GifVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Video2GifVC.h; sourceTree = "<group>"; };
 		80A4C18423A347C40095C3A5 /* Video2GifVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video2GifVC.m; sourceTree = "<group>"; };
-		80A4C18823A368E40095C3A5 /* AppPermissionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppPermissionHandler.h; sourceTree = "<group>"; };
-		80A4C18923A368E40095C3A5 /* AppPermissionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPermissionHandler.m; sourceTree = "<group>"; };
-		80A4C18B23A36B0B0095C3A5 /* UIAlertController+Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Window.m"; sourceTree = "<group>"; };
-		80A4C18C23A36B0B0095C3A5 /* UIAlertController+Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Window.h"; sourceTree = "<group>"; };
 		80A4C18E23A36BCE0095C3A5 /* SystemSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettings.m; sourceTree = "<group>"; };
 		80A4C18F23A36BCE0095C3A5 /* SystemSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettings.h; sourceTree = "<group>"; };
-		80A4C19123A36C6E0095C3A5 /* UIDevice+TFDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+TFDevice.m"; sourceTree = "<group>"; };
-		80A4C19223A36C6E0095C3A5 /* UIDevice+TFDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+TFDevice.h"; sourceTree = "<group>"; };
 		80A4C19423A866110095C3A5 /* Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toast.h; sourceTree = "<group>"; };
 		80A4C19523A866110095C3A5 /* Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Toast.m; sourceTree = "<group>"; };
 		80A4C19723A8665A0095C3A5 /* UIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUtil.h; sourceTree = "<group>"; };
@@ -149,14 +140,8 @@
 				80A4C19823A8665A0095C3A5 /* UIUtil.m */,
 				80A4C19423A866110095C3A5 /* Toast.h */,
 				80A4C19523A866110095C3A5 /* Toast.m */,
-				80A4C19223A36C6E0095C3A5 /* UIDevice+TFDevice.h */,
-				80A4C19123A36C6E0095C3A5 /* UIDevice+TFDevice.m */,
 				80A4C18F23A36BCE0095C3A5 /* SystemSettings.h */,
 				80A4C18E23A36BCE0095C3A5 /* SystemSettings.m */,
-				80A4C18C23A36B0B0095C3A5 /* UIAlertController+Window.h */,
-				80A4C18B23A36B0B0095C3A5 /* UIAlertController+Window.m */,
-				80A4C18823A368E40095C3A5 /* AppPermissionHandler.h */,
-				80A4C18923A368E40095C3A5 /* AppPermissionHandler.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -274,19 +259,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80A4C19323A36C6E0095C3A5 /* UIDevice+TFDevice.m in Sources */,
 				80A4C17223A33C530095C3A5 /* MainVC.m in Sources */,
 				80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */,
 				80A4C19023A36BCE0095C3A5 /* SystemSettings.m in Sources */,
 				80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */,
 				80A4C19923A8665A0095C3A5 /* UIUtil.m in Sources */,
-				80A4C18A23A368E40095C3A5 /* AppPermissionHandler.m in Sources */,
 				805A9D6723AA08D60099638E /* BaseVC.m in Sources */,
 				80A4C16C23A33C530095C3A5 /* AppDelegate.m in Sources */,
 				80A4C19623A866110095C3A5 /* Toast.m in Sources */,
 				80A4C17D23A33C550095C3A5 /* main.m in Sources */,
 				80A4C16F23A33C530095C3A5 /* SceneDelegate.m in Sources */,
-				80A4C18D23A36B0B0095C3A5 /* UIAlertController+Window.m in Sources */,
 				80A4C18523A347C40095C3A5 /* Video2GifVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

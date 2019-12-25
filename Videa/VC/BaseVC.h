@@ -28,6 +28,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)keyboardDidHide;
 
+- (void)checkPhotoLibraryWithHandler:(void(^)(BOOL))handler;
+
+- (void)checkCameraWithHandler:(void(^)(BOOL))handler;
+
+- (void)checkRecordWithHandler:(void(^)(BOOL))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

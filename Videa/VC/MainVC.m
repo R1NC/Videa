@@ -7,7 +7,6 @@
 //
 
 #import "MainVC.h"
-#import "AppPermissionHandler.h"
 
 @interface MainVC ()
 
@@ -21,9 +20,23 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [AppPermissionHandler checkPhotoLibraryWithHandler:^(BOOL granted) {
-        if (!granted) {
-            exit(0);
+    [self checkPhotoLibraryWithHandler:^(BOOL granted) {
+        if (granted) {
+            [self checkCameraWithHandler:^(BOOL granted) {
+                if (granted) {
+                    [self checkRecordWithHandler:^(BOOL granted) {
+                        if (granted) {
+                            //TODO
+                        } else {
+                            exit(0);
+                        }
+                    }];
+                } else {
+                    exit(0);
+                }
+            }];
+        } else {
+           exit(0);
         }
     }];
 }
