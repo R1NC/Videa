@@ -33,9 +33,8 @@
     [self setKeyBoardBgViewHeight:0];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)dealloc:(BOOL)animated {
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

@@ -32,9 +32,8 @@
     [MobileFFmpegConfig setLogDelegate:self];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
+-(void)dealloc {
     if (_isWorking) [MobileFFmpeg cancel];
-    [super viewDidDisappear:animated];
 }
 
 -(void)selctVideoFromPhotoLibrary {
