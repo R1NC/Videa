@@ -148,8 +148,8 @@
                 }];
             } else {
                 validBlock(urlStr);
-                return;
             }
+            return;
         }
     }
     invalidBlock();
