@@ -65,8 +65,8 @@
     if (cmd && cmd.count > 0) {
         _isWorking = YES;
         [MobileFFmpeg executeWithArguments:cmd];
-        int rc = [MobileFFmpeg getLastReturnCode];
-        NSString *output = [MobileFFmpeg getLastCommandOutput];
+        int rc = [MobileFFmpegConfig getLastReturnCode];
+        NSString *output = [MobileFFmpegConfig getLastCommandOutput];
         BOOL success = rc == RETURN_CODE_SUCCESS;
         if (handler) handler(success);
         if (!success) NSLog(@"FFMpeg command execution failed with rc=%d and output=%@.\n", rc, output);
@@ -108,7 +108,7 @@
             NSError* err;
             [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
-                MediaInformation* mediaInfo = [MobileFFmpeg getMediaInformation:tempMov];
+                MediaInformation* mediaInfo = [MobileFFprobe getMediaInformation:tempMov];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self didReceiveMediaInfo:mediaInfo];
                 });

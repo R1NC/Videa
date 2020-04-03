@@ -2,5 +2,5 @@
 platform :ios, '9.3'
 
 target 'Videa' do
-  pod 'mobile-ffmpeg-full', '~> 4.3'
+  pod 'mobile-ffmpeg-full', '~> 4.3.1'
 end
