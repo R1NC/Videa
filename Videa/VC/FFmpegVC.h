@@ -12,7 +12,7 @@
 
 @interface FFmpegVC : BaseVC
 
--(void)selctVideoFromPhotoLibrary;
+-(void)selectVideoFromPhotoLibrary;
 
 -(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo;
 

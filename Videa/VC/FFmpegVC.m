@@ -9,11 +9,12 @@
 #import "FFmpegVC.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface FFmpegVC ()<UIImagePickerControllerDelegate, LogDelegate>
+@interface FFmpegVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, LogDelegate>
 
 @property(nonatomic,strong) UIImagePickerController* ipc;
 @property(nonatomic,strong) dispatch_queue_t workingQueue;
 @property(nonatomic,assign) BOOL isWorking;
+@property(nonatomic,strong) NSString* tempMov;
 
 @end
 
@@ -32,16 +33,22 @@
     [MobileFFmpegConfig setLogDelegate:self];
 }
 
--(void)dealloc {
-    if (_isWorking) [MobileFFmpeg cancel];
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (_isWorking) {
+        [MobileFFmpeg cancel];
+    }
+    if (_tempMov) {
+        [[NSFileManager defaultManager] removeItemAtPath:_tempMov error:nil];
+    }
 }
 
--(void)selctVideoFromPhotoLibrary {
+-(void)selectVideoFromPhotoLibrary {
     [self presentViewController:_ipc animated:YES completion:nil];
 }
 
 -(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo {
-    NSLog(@"Video info: %@", mediaInfo.getRawInformation);
+    NSLog(@"Video info: %@", mediaInfo.getAllProperties);
 }
 
 -(void)didReceiveFFmpegLog:(NSString*)log {
@@ -98,6 +105,8 @@
 }
 */
 
+#pragma mark UINavigationControllerDelegate
+
 #pragma mark UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
@@ -108,6 +117,7 @@
             NSError* err;
             [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
+                self.tempMov = tempMov;
                 MediaInformation* mediaInfo = [MobileFFprobe getMediaInformation:tempMov];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self didReceiveMediaInfo:mediaInfo];
@@ -121,7 +131,7 @@
 
 #pragma mark LogDelegate
 
-- (void)logCallback: (int)level :(NSString*)message {
+- (void)logCallback:(long)executionId :(int)level :(NSString*)message {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self didReceiveFFmpegLog:message];
     });

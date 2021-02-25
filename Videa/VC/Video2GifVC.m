@@ -12,6 +12,7 @@
 
 #define FONT_FILE_NAME @"SourceHanSerifSC-Bold.otf"
 #define TEMP_FONT_FILE_PATH [NSTemporaryDirectory() stringByAppendingPathComponent:FONT_FILE_NAME]
+#define DRAW_TEXT_CMD @"drawtext=text=%@: fontfile=%@: fontcolor=#%@: fontsize=%d: shadowcolor=black@0.5: shadowx=2: shadowy=2: x=(w-text_w)/2: y=(h-text_h*2)"
 
 @interface Video2GifVC ()
 
@@ -32,7 +33,7 @@
 }
 
 - (IBAction)onClickBtnSelect:(id)sender {
-    [self selctVideoFromPhotoLibrary];
+    [self selectVideoFromPhotoLibrary];
 }
 
 - (IBAction)onClickBtnTransform:(id)sender {
@@ -84,8 +85,10 @@
     [super didReceiveMediaInfo:mediaInfo];
     [self deleteTempVideoFile];
     _mediaInfo = mediaInfo;
-    _btnTransform.enabled = _mediaInfo && _mediaInfo.getPath && _mediaInfo.getPath.length > 0;
-    if (_mediaInfo && _mediaInfo.getRawInformation) _tvInfo.text = _mediaInfo.getRawInformation;
+    _btnTransform.enabled = _mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0;
+    if (_mediaInfo && _mediaInfo.getAllProperties) {
+        _tvInfo.text = [NSString stringWithFormat:@"%@", _mediaInfo.getAllProperties];
+    }
 }
 
 -(void)didReceiveFFmpegLog:(NSString*)log {
@@ -109,12 +112,12 @@
         NSString* gifUrl = [self tempFileUrlOfExt:@"gif"];
         [self checkFontFile];
         NSMutableArray* cmd = [NSMutableArray arrayWithArray:@[
-            @"-i", self.mediaInfo.getPath,
+            @"-i", self.mediaInfo.getFilename,
             @"-r", [NSString stringWithFormat:@"%d", frameRate]
         ]];
         if (text && text.length > 0) {
             [cmd addObject:@"-vf"];
-            [cmd addObject:[NSString stringWithFormat:@"drawtext=text=%@: fontfile=%@: fontcolor=#%@: fontsize=%d: shadowcolor=black@0.5: shadowx=2: shadowy=2: x=(w-text_w)/2: y=(h-text_h*2)", text, TEMP_FONT_FILE_PATH, color, size]];
+            [cmd addObject:[NSString stringWithFormat:DRAW_TEXT_CMD, text, TEMP_FONT_FILE_PATH, color, size]];
         }
         [cmd addObject:gifUrl];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
@@ -142,8 +145,8 @@
 }
 
 -(void)deleteTempVideoFile {
-    if (_mediaInfo && _mediaInfo.getPath && _mediaInfo.getPath.length > 0) {
-        [self deleteTempFile:_mediaInfo.getPath];
+    if (_mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0) {
+        [self deleteTempFile:_mediaInfo.getFilename];
     }
 }
 
