@@ -8,7 +8,7 @@
 
 #import "BaseVC.h"
 #import <Photos/Photos.h>
-#import <mobileffmpeg/MobileFFmpeg.h>
+#import <ffmpegkit/FFmpegKit.h>
 
 @interface FFmpegVC : BaseVC
 

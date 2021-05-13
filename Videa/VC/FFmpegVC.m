@@ -8,8 +8,9 @@
 
 #import "FFmpegVC.h"
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <ffmpegkit/FFprobeKit.h>
 
-@interface FFmpegVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, LogDelegate>
+@interface FFmpegVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property(nonatomic,strong) UIImagePickerController* ipc;
 @property(nonatomic,strong) dispatch_queue_t workingQueue;
@@ -30,13 +31,11 @@
     }
     _ipc.delegate = self;
     _workingQueue = dispatch_queue_create("FFmpeg", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_BACKGROUND, 0));
-    [MobileFFmpegConfig setLogDelegate:self];
 }
 
--(void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+-(void)dealloc {
     if (_isWorking) {
-        [MobileFFmpeg cancel];
+        [FFmpegKit cancel];
     }
     if (_tempMov) {
         [[NSFileManager defaultManager] removeItemAtPath:_tempMov error:nil];
@@ -71,13 +70,19 @@
 -(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler {
     if (cmd && cmd.count > 0) {
         _isWorking = YES;
-        [MobileFFmpeg executeWithArguments:cmd];
-        int rc = [MobileFFmpegConfig getLastReturnCode];
-        NSString *output = [MobileFFmpegConfig getLastCommandOutput];
-        BOOL success = rc == RETURN_CODE_SUCCESS;
-        if (handler) handler(success);
-        if (!success) NSLog(@"FFMpeg command execution failed with rc=%d and output=%@.\n", rc, output);
-        _isWorking = NO;
+        [FFmpegKit executeWithArgumentsAsync:cmd withExecuteCallback:^(id<Session> session) {
+            NSString *output = [session getOutput];
+            BOOL success = [[session getReturnCode]isSuccess];
+            if (handler) handler(success);
+            if (!success) NSLog(@"FFMpeg command execution failed with code=%d and output=%@.\n", [[session getReturnCode]getValue], output);
+            self.isWorking = NO;
+        } withLogCallback:^(Log *log) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self didReceiveFFmpegLog:[log getMessage]];
+            });
+        } withStatisticsCallback:^(Statistics *statistics) {
+            //TODO
+        }];
     }
 }
 
@@ -118,7 +123,7 @@
             [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
                 self.tempMov = tempMov;
-                MediaInformation* mediaInfo = [MobileFFprobe getMediaInformation:tempMov];
+                MediaInformation* mediaInfo = [[FFprobeKit getMediaInformation:tempMov] getMediaInformation];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self didReceiveMediaInfo:mediaInfo];
                 });
@@ -127,14 +132,6 @@
     } else {
         [self didReceiveMediaInfo:nil];
     }
-}
-
-#pragma mark LogDelegate
-
-- (void)logCallback:(long)executionId :(int)level :(NSString*)message {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self didReceiveFFmpegLog:message];
-    });
 }
 
 @end
