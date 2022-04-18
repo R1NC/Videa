@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,7 +21,6 @@
 		80A4C19923A8665A0095C3A5 /* UIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19823A8665A0095C3A5 /* UIUtil.m */; };
 		80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19B23A8716C0095C3A5 /* FFmpegVC.m */; };
 		80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19E23A88A470095C3A5 /* M3u8VC.m */; };
-		80CDCA3E23ACA9C3000BBB18 /* SourceHanSerifSC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 80CDCA3B23ACA9C3000BBB18 /* SourceHanSerifSC-Bold.otf */; };
 		91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */; };
 /* End PBXBuildFile section */
 
@@ -53,9 +52,9 @@
 		80A4C19B23A8716C0095C3A5 /* FFmpegVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFmpegVC.m; sourceTree = "<group>"; };
 		80A4C19D23A88A470095C3A5 /* M3u8VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = M3u8VC.h; sourceTree = "<group>"; };
 		80A4C19E23A88A470095C3A5 /* M3u8VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M3u8VC.m; sourceTree = "<group>"; };
-		80CDCA3B23ACA9C3000BBB18 /* SourceHanSerifSC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifSC-Bold.otf"; sourceTree = "<group>"; };
 		80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Videa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C923EB6534D1000A9D3C8E3B /* Pods-Videa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Videa.debug.xcconfig"; path = "Target Support Files/Pods-Videa/Pods-Videa.debug.xcconfig"; sourceTree = "<group>"; };
+		F9A63065280D04930025FFDA /* default.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +148,7 @@
 		80CDCA3723ACA78B000BBB18 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				80CDCA3B23ACA9C3000BBB18 /* SourceHanSerifSC-Bold.otf */,
+				F9A63065280D04930025FFDA /* default.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -224,7 +223,6 @@
 				80A4C17A23A33C550095C3A5 /* LaunchScreen.storyboard in Resources */,
 				80A4C17723A33C550095C3A5 /* Assets.xcassets in Resources */,
 				80A4C17523A33C530095C3A5 /* Main.storyboard in Resources */,
-				80CDCA3E23ACA9C3000BBB18 /* SourceHanSerifSC-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

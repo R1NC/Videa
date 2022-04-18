@@ -70,9 +70,9 @@
 -(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler {
     if (cmd && cmd.count > 0) {
         _isWorking = YES;
-        [FFmpegKit executeWithArgumentsAsync:cmd withExecuteCallback:^(id<Session> session) {
+        [FFmpegKit executeWithArgumentsAsync:cmd withCompleteCallback:^(id<Session> session) {
             NSString *output = [session getOutput];
-            BOOL success = [[session getReturnCode]isSuccess];
+            BOOL success = [[session getReturnCode]isValueSuccess];
             if (handler) handler(success);
             if (!success) NSLog(@"FFMpeg command execution failed with code=%d and output=%@.\n", [[session getReturnCode]getValue], output);
             self.isWorking = NO;
