@@ -23,6 +23,7 @@
 		80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19E23A88A470095C3A5 /* M3u8VC.m */; };
 		91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */; };
 		F9E0CBDD280D8A5F002AD0F9 /* Video2AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */; };
+		F9E0CBDE280E997D002AD0F9 /* default.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9A63065280D04930025FFDA /* default.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E0CBDE280E997D002AD0F9 /* default.ttf in Resources */,
 				80A4C17A23A33C550095C3A5 /* LaunchScreen.storyboard in Resources */,
 				80A4C17723A33C550095C3A5 /* Assets.xcassets in Resources */,
 				80A4C17523A33C530095C3A5 /* Main.storyboard in Resources */,

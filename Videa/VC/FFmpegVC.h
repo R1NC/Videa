@@ -31,6 +31,5 @@
 /// Handle temp file
 -(NSString*)tempFileUrlOfExt:(NSString *)ext;
 -(void)deleteTempFile:(NSString*)filePath;
--(void)deleteTempVideoFile;
 
 @end

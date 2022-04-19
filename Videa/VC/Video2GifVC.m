@@ -23,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setKeyBoardBgViewHeight:0];
+    [self runTask:^{
+        [self checkFontFile];
+    }];
 }
 
 - (IBAction)onClickBtnSelect:(id)sender {
@@ -76,7 +79,6 @@
 
 -(void)didReceiveMediaInfo {
     [super didReceiveMediaInfo];
-    [self deleteTempVideoFile];
     _btnTransform.enabled = self.hasValidMediaFile;
     if (self.hasValidMediaFile) {
         _tvInfo.text = [NSString stringWithFormat:@"%@", self.mediaInfo.getAllProperties];
@@ -102,7 +104,6 @@
     _tvText.enabled = NO;
     [self runTask:^{
         NSString* gifUrl = [self tempFileUrlOfExt:@"gif"];
-        [self checkFontFile];
         NSMutableArray* cmd = [NSMutableArray arrayWithArray:@[
             @"-i", self.mediaInfo.getFilename,
             @"-r", [NSString stringWithFormat:@"%d", frameRate]

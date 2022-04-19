@@ -37,17 +37,10 @@
     _workingQueue = dispatch_queue_create("FFmpeg", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_BACKGROUND, 0));
 }
 
--(void)viewDidDisappear:(BOOL)animated {
-    [self deleteTempVideoFile];
-    [super viewDidDisappear:animated];
-}
-
 -(void)dealloc {
+    [self deleteTempVideoFile];
     if (_isWorking) {
         [FFmpegKit cancel];
-    }
-    if (_tempMov) {
-        [[NSFileManager defaultManager] removeItemAtPath:_tempMov error:nil];
     }
 }
 
@@ -106,25 +99,38 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     [_ipc dismissViewControllerAnimated:YES completion:nil];
+    void(^completion)(NSString*) = ^(NSString* tmp) {
+        [self deleteTempVideoFile];
+        self.tempMov = tmp;
+        if (self.tempMov) {
+            self.mediaInfo = [[FFprobeKit getMediaInformation:self.tempMov] getMediaInformation];
+        } else {
+            self.mediaInfo = nil;
+        }
+        runOnUIThread(^{
+            [self didReceiveMediaInfo];
+        });
+    };
     if (info && info[UIImagePickerControllerMediaURL]) {
         __weak typeof(self) weakSelf = self;
         [self runTask:^{
             __strong typeof(self) strongSelf = weakSelf;
-            NSString* tempMov = [strongSelf tempFileUrlOfExt:@"MOV"];
+            NSString* tmp = [strongSelf tempFileUrlOfExt:@"MOV"];
             NSError* err;
-            [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
-                strongSelf.tempMov = tempMov;
-                MediaInformation* mediaInfo = [[FFprobeKit getMediaInformation:tempMov] getMediaInformation];
-                runOnUIThread(^{
-                    strongSelf.mediaInfo = mediaInfo;
-                    [strongSelf didReceiveMediaInfo];
-                });
+            [[NSFileManager defaultManager] copyItemAtPath:[info[UIImagePickerControllerMediaURL] path] toPath:tmp error:&err];
+            if (err) {
+                NSLog(@"Error: copy media file failed:%@", err.description);
+                completion(nil);
+                return;
+            }
+            if ([[NSFileManager defaultManager] fileExistsAtPath:tmp]) {
+                completion(tmp);
+            } else {
+                completion(nil);
             }
         }];
     } else {
-        _mediaInfo = nil;
-        [self didReceiveMediaInfo];
+        completion(nil);
     }
 }
 
@@ -151,7 +157,7 @@
 #pragma mark TempFile
 
 -(NSString*)tempFileUrlOfExt:(NSString *)ext {
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [NSUUID UUID].UUIDString, ext]];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%f.%@", NSDate.now.timeIntervalSince1970, ext]];
 }
 
 -(void)deleteTempFile:(NSString *)filePath {
@@ -164,8 +170,8 @@
 }
 
 -(void)deleteTempVideoFile {
-    if (_mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0) {
-        [self deleteTempFile:_mediaInfo.getFilename];
+    if (_tempMov) {
+        [self deleteTempFile:_tempMov];
     }
 }
 
