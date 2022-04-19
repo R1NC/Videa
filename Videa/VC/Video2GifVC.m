@@ -77,8 +77,8 @@
 -(void)didReceiveMediaInfo {
     [super didReceiveMediaInfo];
     [self deleteTempVideoFile];
-    _btnTransform.enabled = self.mediaInfo && self.mediaInfo.getFilename && self.mediaInfo.getFilename.length > 0;
-    if (self.mediaInfo && self.mediaInfo.getAllProperties) {
+    _btnTransform.enabled = self.hasValidMediaFile;
+    if (self.hasValidMediaFile) {
         _tvInfo.text = [NSString stringWithFormat:@"%@", self.mediaInfo.getAllProperties];
     }
 }

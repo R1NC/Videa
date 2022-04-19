@@ -12,24 +12,25 @@
 
 @interface FFmpegVC : BaseVC
 
-@property(nonatomic,strong) MediaInformation* mediaInfo;
+@property(nonatomic, readonly) MediaInformation* mediaInfo;
 
--(void)selectVideoFromPhotoLibrary;
-
--(void)didReceiveMediaInfo;
-
+/// Execute task
+-(void)runTask:(void(^)(void))task;
+-(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler;
 -(void)didReceiveFFmpegLog:(NSString*)log;
 
--(NSString*)tempFileUrlOfExt:(NSString *)ext;
+/// Pick media file
+-(void)selectVideoFromPhotoLibrary;
+-(void)didReceiveMediaInfo;
+-(BOOL)hasValidMediaFile;
 
--(void)deleteTempFile:(NSString*)filePath;
-
--(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler;
-
+/// Open or store media file
 -(void)addPhotoLibraryResourceUrl:(NSString*)url type:(PHAssetResourceType)type handler:(void(^)(BOOL))handler;
+-(void)openActivityVCWithPath:(NSString*)path;
 
--(void)runTask:(void(^)(void))task;
-
+/// Handle temp file
+-(NSString*)tempFileUrlOfExt:(NSString *)ext;
+-(void)deleteTempFile:(NSString*)filePath;
 -(void)deleteTempVideoFile;
 
 @end

@@ -32,8 +32,8 @@
 
 -(void)didReceiveMediaInfo {
     [super didReceiveMediaInfo];
-    _btnExport.enabled = self.mediaInfo && self.mediaInfo.getFilename && self.mediaInfo.getFilename.length > 0;
-    if (self.mediaInfo && self.mediaInfo.getAllProperties) {
+    _btnExport.enabled = self.hasValidMediaFile;
+    if (self.hasValidMediaFile) {
         _tvInfo.text = [NSString stringWithFormat:@"%@", self.mediaInfo.getAllProperties];
     }
 }
@@ -75,7 +75,7 @@
         [cmd addObject:mp3Path];
         [self exeFFmpegCommand:cmd handler:^(BOOL success) {
             if (success) {
-                [self openAudioWithPath:mp3Path];
+                [self openActivityVCWithPath:mp3Path];
                 [self toastMsg:@"抽取音频成功"];
             } else {
                 [self toastMsg:@"抽取音频失败"];
@@ -83,14 +83,6 @@
             }
         }];
     }];
-}
-     
-- (void)openAudioWithPath:(NSString*)path {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSArray *items = @[[NSURL fileURLWithPath:path isDirectory:NO]];
-        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-        [self presentViewController:activityVC animated:YES completion:nil];
-    });
 }
 
 @end

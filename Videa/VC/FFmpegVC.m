@@ -12,6 +12,8 @@
 
 @interface FFmpegVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
+@property(nonatomic, strong) MediaInformation* mediaInfo;
+
 @property(nonatomic,strong) UIImagePickerController* ipc;
 @property(nonatomic,strong) dispatch_queue_t workingQueue;
 @property(nonatomic,assign) BOOL isWorking;
@@ -20,6 +22,8 @@
 @end
 
 @implementation FFmpegVC
+
+#pragma mark LifeCycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,29 +51,20 @@
     }
 }
 
--(void)selectVideoFromPhotoLibrary {
-    [self presentViewController:_ipc animated:YES completion:nil];
-}
+/*
+#pragma mark - Navigation
 
--(void)didReceiveMediaInfo {
-    NSLog(@"Video info: %@", _mediaInfo ? _mediaInfo.getAllProperties : @{});
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
+*/
 
--(void)didReceiveFFmpegLog:(NSString*)log {
-    NSLog(@"%@", log);
-}
+#pragma mark ExecuteTask
 
--(NSString*)tempFileUrlOfExt:(NSString *)ext {
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [NSUUID UUID].UUIDString, ext]];
-}
-
--(void)deleteTempFile:(NSString *)filePath {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error;
-    if ([fileManager fileExistsAtPath:filePath]) {
-         BOOL success = [fileManager removeItemAtPath:filePath error:&error];
-         if (!success) NSLog(@"Error: %@", [error localizedDescription]);
-    }
+-(void)runTask:(void (^)(void))task {
+    if (task) dispatch_async(self.workingQueue, task);
 }
 
 -(void)exeFFmpegCommand:(NSArray<NSString*> *)cmd handler:(void(^)(BOOL))handler {
@@ -91,33 +86,23 @@
     }
 }
 
--(void)addPhotoLibraryResourceUrl:(NSString*)url type:(PHAssetResourceType)type handler:(void(^)(BOOL))handler {
-    if (url && url.length > 0) {
-        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:type fileURL:[NSURL URLWithString:url] options:nil];
-        } completionHandler:^(BOOL success, NSError * error) {
-            if (handler) handler(success);
-        }];
-    }
+-(void)didReceiveFFmpegLog:(NSString*)log {
+    NSLog(@"%@", log);
 }
 
--(void)runTask:(void (^)(void))task {
-    if (task) dispatch_async(self.workingQueue, task);
+#pragma mark PickMedia
+
+-(void)selectVideoFromPhotoLibrary {
+    [self presentViewController:_ipc animated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)didReceiveMediaInfo {
+    NSLog(@"Video info: %@", _mediaInfo ? _mediaInfo.getAllProperties : @{});
 }
-*/
 
-#pragma mark UINavigationControllerDelegate
-
-#pragma mark UIImagePickerControllerDelegate
+-(BOOL)hasValidMediaFile {
+    return self.mediaInfo && self.mediaInfo.getFilename && self.mediaInfo.getFilename.length > 0 && self.mediaInfo.getAllProperties;
+}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     [_ipc dismissViewControllerAnimated:YES completion:nil];
@@ -140,6 +125,41 @@
     } else {
         _mediaInfo = nil;
         [self didReceiveMediaInfo];
+    }
+}
+
+#pragma mark OpenOrStoreMedia
+
+-(void)addPhotoLibraryResourceUrl:(NSString*)url type:(PHAssetResourceType)type handler:(void(^)(BOOL))handler {
+    if (url && url.length > 0) {
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:type fileURL:[NSURL URLWithString:url] options:nil];
+        } completionHandler:^(BOOL success, NSError * error) {
+            if (handler) handler(success);
+        }];
+    }
+}
+
+-(void)openActivityVCWithPath:(NSString*)path {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *items = @[[NSURL fileURLWithPath:path isDirectory:NO]];
+        UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+        [self presentViewController:activityVC animated:YES completion:nil];
+    });
+}
+
+#pragma mark TempFile
+
+-(NSString*)tempFileUrlOfExt:(NSString *)ext {
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.%@", [NSUUID UUID].UUIDString, ext]];
+}
+
+-(void)deleteTempFile:(NSString *)filePath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    if ([fileManager fileExistsAtPath:filePath]) {
+         BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+         if (!success) NSLog(@"Error: %@", [error localizedDescription]);
     }
 }
 
