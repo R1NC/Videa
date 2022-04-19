@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define runOnUIThread(block) dispatch_async(dispatch_get_main_queue(), block)
+
 @interface BaseVC : UIViewController
 
 - (void)didBecomeActive;
@@ -19,10 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)didEnterBackground;
 
 - (void)willEnterForeground;
-
-- (void)keyboardDidShow:(CGRect)frame;
-
-- (void)keyboardDidHide;
 
 - (void)keyboardDidShow:(CGRect)frame;
 

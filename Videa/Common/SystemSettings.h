@@ -32,7 +32,7 @@
 //
 //+(void)Notification;
 
-+(void)myApp;
++(void)myApp:(void (^ __nullable)(BOOL success))completion;
 
 //+(void)root;
 

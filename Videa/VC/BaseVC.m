@@ -104,7 +104,7 @@
 
 -(void)callHandler:(void(^)(BOOL))handler result:(BOOL)result {
     if (handler) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        runOnUIThread(^{
             handler(result);
         });
     }
@@ -151,17 +151,18 @@
 }
 
 -(void)alertWithPermission:(NSString*)permission handler:(void(^)(BOOL))handler {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    runOnUIThread((^{
         UIAlertController* alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"无%@访问权限", permission] message:@"请前往设置开启" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            [SystemSettings myApp];
-            [self callHandler:handler result:NO];
+            [SystemSettings myApp:^(BOOL success) {
+                [self callHandler:handler result:NO];
+            }];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self callHandler:handler result:NO];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
-    });
+    }));
 }
 
 @end

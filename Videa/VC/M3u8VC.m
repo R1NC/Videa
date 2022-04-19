@@ -102,22 +102,22 @@
 -(void)checkM3u8Url:(NSString*)urlStr handler:(void(^)(BOOL))handler {
     void(^validBlock)(NSString*) = ^(NSString* url) {
         self.m3u8Url = url;
-        dispatch_async(dispatch_get_main_queue(), ^{
+        runOnUIThread(^{
             [self.view endEditing:YES];
             self.tvUrl.text = url;
             self.avpVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
             self.btnPlay.enabled = YES;
             self.btnDownload.enabled = YES;
+            if (handler) handler(YES);
         });
-        if (handler) handler(YES);
     };
     void(^invalidBlock)(void) = ^ {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        runOnUIThread(^{
             [self.view endEditing:YES];
             self.btnPlay.enabled = NO;
             self.btnDownload.enabled = NO;
+            if (handler) handler(NO);
         });
-        if (handler) handler(NO);
     };
     if (urlStr && urlStr.length > 0) {
         NSURL* url = [NSURL URLWithString:urlStr];
@@ -185,7 +185,7 @@
 }
 
 -(void)toastMsg:(NSString*)msg {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    runOnUIThread(^{
         [[Toast shared] showText:msg];
         self.tvUrl.enabled = YES;
     });

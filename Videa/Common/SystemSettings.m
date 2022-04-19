@@ -55,8 +55,8 @@
 //    [self openRoot:@"NOTIFICATIONS_ID" Path:nil];
 //}
 
-+(void)myApp {
-    [self openURL:UIApplicationOpenSettingsURLString];
++(void)myApp:(void (^ __nullable)(BOOL success))completion {
+    [self openURL:UIApplicationOpenSettingsURLString completion:completion];
 }
 
 //+(void)root {
@@ -78,12 +78,12 @@
 //    }
 //}
 
-+(void)openURL:(NSString*)urlStr {
++(void)openURL:(NSString*)urlStr completion:(void (^ __nullable)(BOOL success))completion {
     NSURL* url = [NSURL URLWithString:urlStr];
     UIApplication *app = [UIApplication sharedApplication];
     if ([app canOpenURL:url]) {
         if (@available(iOS 10.0, *)) {
-            [app openURL:url options:[NSDictionary new] completionHandler:nil];
+            [app openURL:url options:[NSDictionary new] completionHandler:completion];
         } else {
             [app openURL:url];
         }

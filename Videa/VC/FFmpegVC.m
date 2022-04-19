@@ -77,7 +77,7 @@
             if (!success) NSLog(@"FFMpeg command execution failed with code=%d and output=%@.\n", [[session getReturnCode]getValue], output);
             self.isWorking = NO;
         } withLogCallback:^(Log *log) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            runOnUIThread(^{
                 [self didReceiveFFmpegLog:[log getMessage]];
             });
         } withStatisticsCallback:^(Statistics *statistics) {
@@ -116,7 +116,7 @@
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
                 strongSelf.tempMov = tempMov;
                 MediaInformation* mediaInfo = [[FFprobeKit getMediaInformation:tempMov] getMediaInformation];
-                dispatch_async(dispatch_get_main_queue(), ^{
+                runOnUIThread(^{
                     strongSelf.mediaInfo = mediaInfo;
                     [strongSelf didReceiveMediaInfo];
                 });
@@ -141,7 +141,7 @@
 }
 
 -(void)openActivityVCWithPath:(NSString*)path {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    runOnUIThread(^{
         NSArray *items = @[[NSURL fileURLWithPath:path isDirectory:NO]];
         UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
         [self presentViewController:activityVC animated:YES completion:nil];

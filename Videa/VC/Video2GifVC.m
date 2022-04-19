@@ -137,7 +137,7 @@
 }
 
 -(void)toastMsg:(NSString*)msg {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    runOnUIThread(^{
         [[Toast shared] showText:msg];
         self.btnSelectVideo.enabled = YES;
         self.btnTransform.enabled = YES;
