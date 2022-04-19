@@ -12,9 +12,11 @@
 
 @interface FFmpegVC : BaseVC
 
+@property(nonatomic,strong) MediaInformation* mediaInfo;
+
 -(void)selectVideoFromPhotoLibrary;
 
--(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo;
+-(void)didReceiveMediaInfo;
 
 -(void)didReceiveFFmpegLog:(NSString*)log;
 
@@ -27,5 +29,7 @@
 -(void)addPhotoLibraryResourceUrl:(NSString*)url type:(PHAssetResourceType)type handler:(void(^)(BOOL))handler;
 
 -(void)runTask:(void(^)(void))task;
+
+-(void)deleteTempVideoFile;
 
 @end

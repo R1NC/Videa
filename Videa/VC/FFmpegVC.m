@@ -33,6 +33,11 @@
     _workingQueue = dispatch_queue_create("FFmpeg", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_BACKGROUND, 0));
 }
 
+-(void)viewDidDisappear:(BOOL)animated {
+    [self deleteTempVideoFile];
+    [super viewDidDisappear:animated];
+}
+
 -(void)dealloc {
     if (_isWorking) {
         [FFmpegKit cancel];
@@ -46,8 +51,8 @@
     [self presentViewController:_ipc animated:YES completion:nil];
 }
 
--(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo {
-    NSLog(@"Video info: %@", mediaInfo.getAllProperties);
+-(void)didReceiveMediaInfo {
+    NSLog(@"Video info: %@", _mediaInfo ? _mediaInfo.getAllProperties : @{});
 }
 
 -(void)didReceiveFFmpegLog:(NSString*)log {
@@ -117,20 +122,30 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
     [_ipc dismissViewControllerAnimated:YES completion:nil];
     if (info && info[UIImagePickerControllerMediaURL]) {
+        __weak typeof(self) weakSelf = self;
         [self runTask:^{
-            NSString* tempMov = [self tempFileUrlOfExt:@"MOV"];
+            __strong typeof(self) strongSelf = weakSelf;
+            NSString* tempMov = [strongSelf tempFileUrlOfExt:@"MOV"];
             NSError* err;
             [[NSFileManager defaultManager] copyItemAtURL:info[UIImagePickerControllerMediaURL] toURL:[NSURL fileURLWithPath:tempMov] error:&err];
             if ([[NSFileManager defaultManager] fileExistsAtPath:tempMov]) {
-                self.tempMov = tempMov;
+                strongSelf.tempMov = tempMov;
                 MediaInformation* mediaInfo = [[FFprobeKit getMediaInformation:tempMov] getMediaInformation];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self didReceiveMediaInfo:mediaInfo];
+                    strongSelf.mediaInfo = mediaInfo;
+                    [strongSelf didReceiveMediaInfo];
                 });
             }
         }];
     } else {
-        [self didReceiveMediaInfo:nil];
+        _mediaInfo = nil;
+        [self didReceiveMediaInfo];
+    }
+}
+
+-(void)deleteTempVideoFile {
+    if (_mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0) {
+        [self deleteTempFile:_mediaInfo.getFilename];
     }
 }
 

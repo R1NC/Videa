@@ -16,8 +16,6 @@
 
 @interface Video2GifVC ()
 
-@property(nonatomic,strong) MediaInformation* mediaInfo;
-
 @end
 
 @implementation Video2GifVC
@@ -25,11 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setKeyBoardBgViewHeight:0];
-}
-
--(void)viewDidDisappear:(BOOL)animated {
-    [self deleteTempVideoFile];
-    [super viewDidDisappear:animated];
 }
 
 - (IBAction)onClickBtnSelect:(id)sender {
@@ -81,13 +74,12 @@
 }
 */
 
--(void)didReceiveMediaInfo:(MediaInformation *)mediaInfo {
-    [super didReceiveMediaInfo:mediaInfo];
+-(void)didReceiveMediaInfo {
+    [super didReceiveMediaInfo];
     [self deleteTempVideoFile];
-    _mediaInfo = mediaInfo;
-    _btnTransform.enabled = _mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0;
-    if (_mediaInfo && _mediaInfo.getAllProperties) {
-        _tvInfo.text = [NSString stringWithFormat:@"%@", _mediaInfo.getAllProperties];
+    _btnTransform.enabled = self.mediaInfo && self.mediaInfo.getFilename && self.mediaInfo.getFilename.length > 0;
+    if (self.mediaInfo && self.mediaInfo.getAllProperties) {
+        _tvInfo.text = [NSString stringWithFormat:@"%@", self.mediaInfo.getAllProperties];
     }
 }
 
@@ -141,12 +133,6 @@
     if (![fm fileExistsAtPath:TEMP_FONT_FILE_PATH]) {
         NSString* bundleFontFile = [[NSBundle mainBundle] pathForResource:FONT_FILE_NAME ofType:nil];
         [fm copyItemAtPath:bundleFontFile toPath:TEMP_FONT_FILE_PATH error:nil];
-    }
-}
-
--(void)deleteTempVideoFile {
-    if (_mediaInfo && _mediaInfo.getFilename && _mediaInfo.getFilename.length > 0) {
-        [self deleteTempFile:_mediaInfo.getFilename];
     }
 }
 

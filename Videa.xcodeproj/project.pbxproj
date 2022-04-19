@@ -22,6 +22,7 @@
 		80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19B23A8716C0095C3A5 /* FFmpegVC.m */; };
 		80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19E23A88A470095C3A5 /* M3u8VC.m */; };
 		91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */; };
+		F9E0CBDD280D8A5F002AD0F9 /* Video2AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,8 @@
 		80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Videa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C923EB6534D1000A9D3C8E3B /* Pods-Videa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Videa.debug.xcconfig"; path = "Target Support Files/Pods-Videa/Pods-Videa.debug.xcconfig"; sourceTree = "<group>"; };
 		F9A63065280D04930025FFDA /* default.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.ttf; sourceTree = "<group>"; };
+		F9E0CBDB280D8A5F002AD0F9 /* Video2AudioVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Video2AudioVC.h; sourceTree = "<group>"; };
+		F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video2AudioVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				80A4C18423A347C40095C3A5 /* Video2GifVC.m */,
 				80A4C19D23A88A470095C3A5 /* M3u8VC.h */,
 				80A4C19E23A88A470095C3A5 /* M3u8VC.m */,
+				F9E0CBDB280D8A5F002AD0F9 /* Video2AudioVC.h */,
+				F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				80A4C17D23A33C550095C3A5 /* main.m in Sources */,
 				80A4C16F23A33C530095C3A5 /* SceneDelegate.m in Sources */,
 				80A4C18523A347C40095C3A5 /* Video2GifVC.m in Sources */,
+				F9E0CBDD280D8A5F002AD0F9 /* Video2AudioVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
