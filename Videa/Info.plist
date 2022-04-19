@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -21,13 +23,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>图像采集</string>
+	<string>用于采集图像</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>声音采集</string>
+	<string>用于采集声音</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>保存视频或图片</string>
+	<string>用于保存图片或视频</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>选图片和视频</string>
+	<string>用于选取图片或视频</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
