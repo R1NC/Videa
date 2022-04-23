@@ -18,6 +18,9 @@
 @property(nonatomic,strong) AVPlayerViewController* avpVC;
 @property(nonatomic,strong) NSString* m3u8Url;
 
+@property(nonatomic,assign) BOOL durationIsReady;
+@property(nonatomic,assign) NSInteger duration;
+
 @end
 
 @implementation M3u8VC
@@ -30,6 +33,7 @@
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     _avpVC = [AVPlayerViewController new];
     _avpVC.allowsPictureInPicturePlayback = YES;
+    _progressView.progress = 0;
     [self setKeyBoardBgViewHeight:0];
 }
 
@@ -97,6 +101,35 @@
 -(void)didReceiveFFmpegLog:(NSString*)log {
     [super didReceiveFFmpegLog:log];
     [UIUtil textView:_tvInfo appendLine:log];
+    
+    if (self.durationIsReady) {
+        self.labelDuration.text = log;
+        self.duration = [self parseTimerStr:log];
+    }
+    self.durationIsReady = [log rangeOfString:@"Duration:"].location != NSNotFound;
+    
+    NSRange timeRange = [log rangeOfString:@"time="];
+    if (timeRange.location != NSNotFound) {
+        NSString *s0 = [log substringFromIndex:timeRange.location + 5];
+        NSString *s1 = [s0 substringToIndex:[s0 rangeOfString:@" "].location];
+        self.labelTime.text = s1;
+        NSInteger time = [self parseTimerStr:s1];
+        if (self.duration > 0 && time >= 0 && time <= self.duration) {
+            self.progressView.progress = time * 1.0 / self.duration;
+        }
+    }
+}
+
+- (NSInteger)parseTimerStr:(NSString*)str {
+    NSArray<NSString*> *arr = [str componentsSeparatedByString:@":"];
+    return 3600 * [self intWithStr:arr[0]] + 60 * [self intWithStr:arr[1]] + [self intWithStr:arr[2]];
+}
+
+- (NSInteger)intWithStr:(NSString*)str {
+    if ([str rangeOfString:@"0"].location == 0) {
+        return [str substringFromIndex:1].integerValue;
+    }
+    return str.integerValue;
 }
 
 -(void)checkM3u8Url:(NSString*)urlStr handler:(void(^)(BOOL))handler {
@@ -123,6 +156,10 @@
         NSURL* url = [NSURL URLWithString:urlStr];
         if (url && url.scheme && url.host) {
             if ([urlStr rangeOfString:@".m3u8"].location == NSNotFound) {
+                self.durationIsReady = NO;
+                self.duration = 0;
+                self.progressView.progress = 0;
+                
                 [self runTask:^{
                     NSString* html = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlStr] encoding:NSUTF8StringEncoding error:nil];
                     if (html && html.length > 0) {

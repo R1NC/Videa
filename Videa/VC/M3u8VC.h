@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) IBOutlet UITextView *tvInfo;
 @property (strong, nonatomic) IBOutlet UIButton *btnPlay;
 @property (strong, nonatomic) IBOutlet UIButton *btnDownload;
+@property (weak, nonatomic) IBOutlet UILabel *labelDuration;
+@property (weak, nonatomic) IBOutlet UILabel *labelTime;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintHeightOfBottomView;
 
 @end

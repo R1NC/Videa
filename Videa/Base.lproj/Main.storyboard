@@ -79,7 +79,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-CD-2tq">
-                                <rect key="frame" x="10" y="178" width="394" height="654"/>
+                                <rect key="frame" x="10" y="183" width="394" height="639.5"/>
                                 <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="0.10276648116438356" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -126,28 +126,50 @@
                                     <constraint firstAttribute="height" constant="20" id="41p-Cb-58o"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaB-ZW-vaj">
+                                <rect key="frame" x="10" y="838.5" width="66" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scY-YW-BlP">
+                                <rect key="frame" x="338" y="838.5" width="66" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hg8-jT-NSO">
+                                <rect key="frame" x="10" y="832.5" width="394" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kCI-HC-OQV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rop-7F-fjm" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="0Qg-kJ-pBP"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="Rhf-Xc-ilT" secondAttribute="bottom" id="0Z3-1i-nKl"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="EaB-ZW-vaj" secondAttribute="bottom" constant="10" id="1tA-vd-aDT"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="6oX-ZW-hg5"/>
-                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="Aqh-nc-YPS" secondAttribute="bottom" constant="5" id="9G0-gg-bIH"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="10" id="7Hs-rz-8fZ"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="hg8-jT-NSO" secondAttribute="trailing" constant="10" id="F1I-er-APp"/>
                             <constraint firstItem="Rop-7F-fjm" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="FFA-Dq-HqZ"/>
-                            <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="FJF-mk-bK3"/>
+                            <constraint firstItem="hg8-jT-NSO" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="10" id="Ngb-Dp-rOS"/>
+                            <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="NiZ-GA-dTd"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="scY-YW-BlP" secondAttribute="bottom" constant="10" id="SHB-CY-vme"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="YNk-rI-6KR" secondAttribute="trailing" constant="10" id="UqK-Zi-l8v"/>
                             <constraint firstItem="Rhf-Xc-ilT" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" id="YVp-uk-pHd"/>
+                            <constraint firstItem="EaB-ZW-vaj" firstAttribute="top" secondItem="hg8-jT-NSO" secondAttribute="bottom" constant="2" id="Zae-FL-759"/>
                             <constraint firstItem="Aqh-nc-YPS" firstAttribute="leading" secondItem="Rop-7F-fjm" secondAttribute="trailing" constant="8" symbolic="YES" id="b8o-m4-Xwk"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="scY-YW-BlP" secondAttribute="trailing" constant="10" id="dgD-uq-71h"/>
                             <constraint firstItem="Aqh-nc-YPS" firstAttribute="centerX" secondItem="wqM-Q0-OBc" secondAttribute="centerX" id="f9x-zU-nZL"/>
                             <constraint firstItem="Aqh-nc-YPS" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="fcy-vA-K6s"/>
-                            <constraint firstItem="Rhf-Xc-ilT" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="10" id="fk2-NH-V6y"/>
+                            <constraint firstItem="hg8-jT-NSO" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="hyE-kr-ME4"/>
+                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="Rop-7F-fjm" secondAttribute="bottom" constant="10" id="jfE-HS-e3k"/>
+                            <constraint firstItem="EaB-ZW-vaj" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="lDn-r6-QpQ"/>
                             <constraint firstItem="YNk-rI-6KR" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="mTs-Kw-k1g"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="mYd-hr-bj0"/>
                             <constraint firstItem="YNk-rI-6KR" firstAttribute="leading" secondItem="Aqh-nc-YPS" secondAttribute="trailing" constant="8" symbolic="YES" id="smA-eN-3o5"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="10" id="syC-LA-ddG"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="Rhf-Xc-ilT" secondAttribute="trailing" id="yNs-Tp-EhH"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="10" id="yij-Eq-9Wf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="m3u8 播放/下载" id="j7J-Up-E65"/>
@@ -155,13 +177,16 @@
                         <outlet property="btnDownload" destination="YNk-rI-6KR" id="TpW-U7-lYN"/>
                         <outlet property="btnPlay" destination="Rop-7F-fjm" id="f3b-Bq-zrS"/>
                         <outlet property="constraintHeightOfBottomView" destination="41p-Cb-58o" id="JNf-O0-Yzn"/>
+                        <outlet property="labelDuration" destination="scY-YW-BlP" id="ZGh-gi-Gk9"/>
+                        <outlet property="labelTime" destination="EaB-ZW-vaj" id="xDt-g2-anI"/>
+                        <outlet property="progressView" destination="hg8-jT-NSO" id="Cac-SX-fln"/>
                         <outlet property="tvInfo" destination="xAr-CD-2tq" id="Pz6-5B-gvr"/>
                         <outlet property="tvUrl" destination="eGU-39-Ewe" id="Pl2-ng-UV2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1i-AL-f5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="82"/>
+            <point key="canvasLocation" x="1418.840579710145" y="81.696428571428569"/>
         </scene>
         <!--从视频提取音频-->
         <scene sceneID="jWC-UU-jyk">
