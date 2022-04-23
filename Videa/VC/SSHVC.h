@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextView *tvConsole;
 @property (weak, nonatomic) IBOutlet UITextField *tfCommand;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBottomViewHeight;
+@property (weak, nonatomic) IBOutlet UIButton *btnCtrlC;
 
 @end
 
