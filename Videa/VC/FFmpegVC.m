@@ -7,8 +7,10 @@
 //
 
 #import "FFmpegVC.h"
+#import "Toast.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <ffmpegkit/FFprobeKit.h>
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface FFmpegVC ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -35,6 +37,48 @@
     }
     _ipc.delegate = self;
     _workingQueue = dispatch_queue_create("FFmpeg", dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_BACKGROUND, 0));
+    
+    [AFNetworkReachabilityManager.sharedManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"Network switched to WWN");
+                break;
+             case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"Network switched to WiFi");
+                break;
+             case AFNetworkReachabilityStatusUnknown:
+                NSLog(@"Network status Unknown");
+                break;
+                case AFNetworkReachabilityStatusNotReachable:
+                NSLog(@"Network Not Reachable");
+                runOnUIThread(^{
+                    [[Toast shared] showText:@"网络不可用"];
+                });
+                break;
+            default:
+                break;
+        }
+    }];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [AFNetworkReachabilityManager.sharedManager startMonitoring];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AFNetworkReachabilityManager.sharedManager stopMonitoring];
+}
+
+- (void)didBecomeActive {
+    [super didBecomeActive];
+    [AFNetworkReachabilityManager.sharedManager startMonitoring];
+}
+
+- (void)willResignActive {
+    [super willResignActive];
+    [AFNetworkReachabilityManager.sharedManager stopMonitoring];
 }
 
 -(void)dealloc {
