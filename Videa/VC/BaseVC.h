@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checkRecordWithHandler:(void(^)(BOOL))handler;
 
+-(void)setKeyBoardBgViewHeight:(CGFloat)height;
+
 @end
 
 NS_ASSUME_NONNULL_END

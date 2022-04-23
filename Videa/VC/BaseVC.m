@@ -29,6 +29,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShowN:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHideN:) name:UIKeyboardDidHideNotification object:nil];
     SetTapCallback(self.view, @selector(onTapRoot));
+    [self setKeyBoardBgViewHeight:0];
 }
 
 -(void)onTapRoot {
@@ -84,13 +85,19 @@
 
 - (void)willEnterForeground {}
 
-- (void)keyboardWillShow:(CGRect)frame {}
+- (void)keyboardWillShow:(CGRect)frame {
+    [self setKeyBoardBgViewHeight:frame.size.height];
+}
 
-- (void)keyboardWillHide {}
+- (void)keyboardWillHide {
+    [self setKeyBoardBgViewHeight:0];
+}
 
 - (void)keyboardDidShow:(CGRect)frame {}
 
 - (void)keyboardDidHide {}
+
+-(void)setKeyBoardBgViewHeight:(CGFloat)height {}
 
 /*
 #pragma mark - Navigation

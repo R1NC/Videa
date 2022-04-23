@@ -22,6 +22,8 @@
 		80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19B23A8716C0095C3A5 /* FFmpegVC.m */; };
 		80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A4C19E23A88A470095C3A5 /* M3u8VC.m */; };
 		91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */; };
+		F94EEA262813FCFA00A13250 /* SSH.m in Sources */ = {isa = PBXBuildFile; fileRef = F94EEA252813FCFA00A13250 /* SSH.m */; };
+		F94EEA292814036400A13250 /* SSHVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F94EEA282814036400A13250 /* SSHVC.m */; };
 		F9E0CBDD280D8A5F002AD0F9 /* Video2AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */; };
 		F9E0CBDE280E997D002AD0F9 /* default.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9A63065280D04930025FFDA /* default.ttf */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,10 @@
 		80A4C19E23A88A470095C3A5 /* M3u8VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = M3u8VC.m; sourceTree = "<group>"; };
 		80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Videa.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C923EB6534D1000A9D3C8E3B /* Pods-Videa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Videa.debug.xcconfig"; path = "Target Support Files/Pods-Videa/Pods-Videa.debug.xcconfig"; sourceTree = "<group>"; };
+		F94EEA242813FCFA00A13250 /* SSH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSH.h; sourceTree = "<group>"; };
+		F94EEA252813FCFA00A13250 /* SSH.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSH.m; sourceTree = "<group>"; };
+		F94EEA272814036400A13250 /* SSHVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHVC.h; sourceTree = "<group>"; };
+		F94EEA282814036400A13250 /* SSHVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHVC.m; sourceTree = "<group>"; };
 		F9A63065280D04930025FFDA /* default.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.ttf; sourceTree = "<group>"; };
 		F9E0CBDB280D8A5F002AD0F9 /* Video2AudioVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Video2AudioVC.h; sourceTree = "<group>"; };
 		F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video2AudioVC.m; sourceTree = "<group>"; };
@@ -134,6 +140,8 @@
 				80A4C19E23A88A470095C3A5 /* M3u8VC.m */,
 				F9E0CBDB280D8A5F002AD0F9 /* Video2AudioVC.h */,
 				F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */,
+				F94EEA272814036400A13250 /* SSHVC.h */,
+				F94EEA282814036400A13250 /* SSHVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -147,6 +155,8 @@
 				80A4C19523A866110095C3A5 /* Toast.m */,
 				80A4C18F23A36BCE0095C3A5 /* SystemSettings.h */,
 				80A4C18E23A36BCE0095C3A5 /* SystemSettings.m */,
+				F94EEA242813FCFA00A13250 /* SSH.h */,
+				F94EEA252813FCFA00A13250 /* SSH.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -284,12 +294,14 @@
 			files = (
 				80A4C17223A33C530095C3A5 /* MainVC.m in Sources */,
 				80A4C19F23A88A470095C3A5 /* M3u8VC.m in Sources */,
+				F94EEA262813FCFA00A13250 /* SSH.m in Sources */,
 				80A4C19023A36BCE0095C3A5 /* SystemSettings.m in Sources */,
 				80A4C19C23A8716C0095C3A5 /* FFmpegVC.m in Sources */,
 				80A4C19923A8665A0095C3A5 /* UIUtil.m in Sources */,
 				805A9D6723AA08D60099638E /* BaseVC.m in Sources */,
 				80A4C16C23A33C530095C3A5 /* AppDelegate.m in Sources */,
 				80A4C19623A866110095C3A5 /* Toast.m in Sources */,
+				F94EEA292814036400A13250 /* SSHVC.m in Sources */,
 				80A4C17D23A33C550095C3A5 /* main.m in Sources */,
 				80A4C16F23A33C530095C3A5 /* SceneDelegate.m in Sources */,
 				80A4C18523A347C40095C3A5 /* Video2GifVC.m in Sources */,

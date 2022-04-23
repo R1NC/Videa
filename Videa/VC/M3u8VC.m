@@ -34,7 +34,6 @@
     _avpVC = [AVPlayerViewController new];
     _avpVC.allowsPictureInPicturePlayback = YES;
     _progressView.progress = 0;
-    [self setKeyBoardBgViewHeight:0];
 }
 
 - (void)dealloc:(BOOL)animated {
@@ -78,14 +77,6 @@
     if (_pasteboardChangeCount < [UIPasteboard generalPasteboard].changeCount) {
         [[NSNotificationCenter defaultCenter] postNotificationName:UIPasteboardChangedNotification object:[UIPasteboard generalPasteboard]];
     }
-}
-
-- (void)keyboardWillShow:(CGRect)frame {
-    [self setKeyBoardBgViewHeight:frame.size.height];
-}
-
-- (void)keyboardWillHide {
-    [self setKeyBoardBgViewHeight:0];
 }
 
 /*

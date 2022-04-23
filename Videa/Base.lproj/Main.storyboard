@@ -41,17 +41,27 @@
                                     <segue destination="u0S-vL-kde" kind="show" id="uG1-2x-P5Y"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOS-9b-5Qq">
+                                <rect key="frame" x="15" y="238" width="384" height="30"/>
+                                <state key="normal" title="SSH 终端"/>
+                                <connections>
+                                    <segue destination="JYo-PR-BK6" kind="show" id="qtz-fp-gc5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h3w-dc-pFL" secondAttribute="trailing" constant="15" id="CmB-d6-NsH"/>
                             <constraint firstItem="idG-N2-DUa" firstAttribute="top" secondItem="Nnp-be-bFS" secondAttribute="bottom" constant="15" id="Ez7-zT-fiJ"/>
+                            <constraint firstItem="TOS-9b-5Qq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="F3H-tr-2JC"/>
                             <constraint firstItem="h3w-dc-pFL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="FR0-Vn-fsq"/>
                             <constraint firstItem="h3w-dc-pFL" firstAttribute="top" secondItem="idG-N2-DUa" secondAttribute="bottom" constant="15" id="JOI-pg-h63"/>
                             <constraint firstItem="Nnp-be-bFS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="Mph-Qy-ztz"/>
                             <constraint firstItem="idG-N2-DUa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="OXf-Lx-xnz"/>
+                            <constraint firstItem="TOS-9b-5Qq" firstAttribute="top" secondItem="h3w-dc-pFL" secondAttribute="bottom" constant="15" id="Ud9-YT-eno"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="idG-N2-DUa" secondAttribute="trailing" constant="15" id="cLx-nr-Qse"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TOS-9b-5Qq" secondAttribute="trailing" constant="15" id="fPo-j3-KR8"/>
                             <constraint firstItem="Nnp-be-bFS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="iLg-7y-hOz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nnp-be-bFS" secondAttribute="trailing" constant="15" id="nkd-Cc-DVl"/>
                         </constraints>
@@ -176,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1i-AL-f5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1418.840579710145" y="81.696428571428569"/>
+            <point key="canvasLocation" x="1996" y="-539"/>
         </scene>
         <!--从视频提取音频-->
         <scene sceneID="jWC-UU-jyk">
@@ -245,7 +255,106 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eux-ev-6aa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1419" y="794"/>
+            <point key="canvasLocation" x="1996" y="213"/>
+        </scene>
+        <!--SSH 终端-->
+        <scene sceneID="kNy-kb-aPa">
+            <objects>
+                <viewController title="SSH 终端" id="JYo-PR-BK6" customClass="SSHVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gR9-PC-1UX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMK-i6-t38">
+                                <rect key="frame" x="10" y="188" width="394" height="618"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="主机地址" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gAB-aj-En7">
+                                <rect key="frame" x="10" y="98" width="394" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="e7q-0u-OaB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="用户名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cGc-sQ-G3i">
+                                <rect key="frame" x="10" y="143" width="213.5" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="afF-zq-6BG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="next"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NbO-tm-WJe">
+                                <rect key="frame" x="233.5" y="143" width="170.5" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="xOC-Hc-JZ1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6L-cA-Sfl" userLabel="BottomView">
+                                <rect key="frame" x="30" y="861" width="354" height="1"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="W0a-z0-qhb"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="命令行" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CaO-WH-0wg">
+                                <rect key="frame" x="10" y="816" width="394" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="YyF-14-T6w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="done"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ifN-K0-ilf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ifN-K0-ilf" firstAttribute="trailing" secondItem="NbO-tm-WJe" secondAttribute="trailing" constant="10" id="3CL-Na-Bgp"/>
+                            <constraint firstItem="NbO-tm-WJe" firstAttribute="top" secondItem="gAB-aj-En7" secondAttribute="bottom" constant="10" id="7o1-fL-DUm"/>
+                            <constraint firstItem="ifN-K0-ilf" firstAttribute="trailing" secondItem="gAB-aj-En7" secondAttribute="trailing" constant="10" id="CPE-qv-qTs"/>
+                            <constraint firstItem="gAB-aj-En7" firstAttribute="leading" secondItem="ifN-K0-ilf" secondAttribute="leading" constant="10" id="CZf-fl-uuz"/>
+                            <constraint firstItem="CaO-WH-0wg" firstAttribute="leading" secondItem="ifN-K0-ilf" secondAttribute="leading" constant="10" id="IFy-k8-bQN"/>
+                            <constraint firstItem="r6L-cA-Sfl" firstAttribute="top" secondItem="CaO-WH-0wg" secondAttribute="bottom" constant="10" id="JxE-m3-TlK"/>
+                            <constraint firstItem="gAB-aj-En7" firstAttribute="top" secondItem="ifN-K0-ilf" secondAttribute="top" constant="10" id="KVX-hN-ffe"/>
+                            <constraint firstItem="CaO-WH-0wg" firstAttribute="top" secondItem="GMK-i6-t38" secondAttribute="bottom" constant="10" id="Xyr-3e-Ba9"/>
+                            <constraint firstItem="NbO-tm-WJe" firstAttribute="leading" secondItem="cGc-sQ-G3i" secondAttribute="trailing" constant="10" id="bWY-jH-J18"/>
+                            <constraint firstItem="r6L-cA-Sfl" firstAttribute="leading" secondItem="gR9-PC-1UX" secondAttribute="leadingMargin" constant="10" id="cMi-pQ-pNC"/>
+                            <constraint firstItem="cGc-sQ-G3i" firstAttribute="top" secondItem="gAB-aj-En7" secondAttribute="bottom" constant="10" id="dUp-xT-TSs"/>
+                            <constraint firstItem="cGc-sQ-G3i" firstAttribute="leading" secondItem="ifN-K0-ilf" secondAttribute="leading" constant="10" id="jIG-RL-UfU"/>
+                            <constraint firstItem="GMK-i6-t38" firstAttribute="top" secondItem="NbO-tm-WJe" secondAttribute="bottom" constant="10" id="kgN-GT-MQF"/>
+                            <constraint firstItem="GMK-i6-t38" firstAttribute="leading" secondItem="ifN-K0-ilf" secondAttribute="leading" constant="10" id="mRi-um-PaF"/>
+                            <constraint firstItem="ifN-K0-ilf" firstAttribute="trailing" secondItem="CaO-WH-0wg" secondAttribute="trailing" constant="10" id="qXF-WM-JRp"/>
+                            <constraint firstItem="ifN-K0-ilf" firstAttribute="trailing" secondItem="GMK-i6-t38" secondAttribute="trailing" constant="10" id="tHa-zH-r9f"/>
+                            <constraint firstItem="ifN-K0-ilf" firstAttribute="bottom" secondItem="r6L-cA-Sfl" secondAttribute="bottom" id="wtc-I2-46A"/>
+                            <constraint firstItem="cGc-sQ-G3i" firstAttribute="width" secondItem="NbO-tm-WJe" secondAttribute="width" multiplier="1.25424" id="xL4-L4-tLZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="r6L-cA-Sfl" secondAttribute="trailing" constant="10" id="yXf-NP-0rf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="SSH 终端" id="Ve5-St-Bzo"/>
+                    <connections>
+                        <outlet property="constraintBottomViewHeight" destination="W0a-z0-qhb" id="Az4-Lz-kdu"/>
+                        <outlet property="tfCommand" destination="CaO-WH-0wg" id="HOv-bF-yFM"/>
+                        <outlet property="tfHost" destination="gAB-aj-En7" id="WRH-Oh-slF"/>
+                        <outlet property="tfPassword" destination="NbO-tm-WJe" id="lFF-8W-vw7"/>
+                        <outlet property="tfUser" destination="cGc-sQ-G3i" id="veP-mL-hlP"/>
+                        <outlet property="tvConsole" destination="GMK-i6-t38" id="uKS-Rw-yhh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ftc-L7-j1Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1995.6521739130437" y="979.6875"/>
         </scene>
         <!--视频 -> GIF-->
         <scene sceneID="pSO-nE-TRn">
@@ -383,7 +492,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tU3-ou-znE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1419" y="-625"/>
+            <point key="canvasLocation" x="1996" y="-1382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ytr-O6-5ZX">
@@ -405,6 +514,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
