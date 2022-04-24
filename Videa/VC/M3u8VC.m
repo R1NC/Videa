@@ -150,6 +150,8 @@
                 self.durationIsReady = NO;
                 self.duration = 0;
                 self.progressView.progress = 0;
+                self.labelTime.text = @"00:00:00.00";
+                self.labelDuration.text = @"00:00:00.00";
                 
                 [self runTask:^{
                     NSString* html = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlStr] encoding:NSUTF8StringEncoding error:nil];
