@@ -24,6 +24,7 @@
 		91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */; };
 		F94EEA262813FCFA00A13250 /* SSH.m in Sources */ = {isa = PBXBuildFile; fileRef = F94EEA252813FCFA00A13250 /* SSH.m */; };
 		F94EEA292814036400A13250 /* SSHVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F94EEA282814036400A13250 /* SSHVC.m */; };
+		F99A4A532816C2D400FDC3DB /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F99A4A522816C2D400FDC3DB /* WebKit.framework */; };
 		F9E0CBDD280D8A5F002AD0F9 /* Video2AudioVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */; };
 		F9E0CBDE280E997D002AD0F9 /* default.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9A63065280D04930025FFDA /* default.ttf */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		F94EEA252813FCFA00A13250 /* SSH.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSH.m; sourceTree = "<group>"; };
 		F94EEA272814036400A13250 /* SSHVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHVC.h; sourceTree = "<group>"; };
 		F94EEA282814036400A13250 /* SSHVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHVC.m; sourceTree = "<group>"; };
+		F99A4A522816C2D400FDC3DB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F9A63065280D04930025FFDA /* default.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.ttf; sourceTree = "<group>"; };
 		F9E0CBDB280D8A5F002AD0F9 /* Video2AudioVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Video2AudioVC.h; sourceTree = "<group>"; };
 		F9E0CBDC280D8A5F002AD0F9 /* Video2AudioVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Video2AudioVC.m; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F99A4A532816C2D400FDC3DB /* WebKit.framework in Frameworks */,
 				91F7E184ED42DCCD893E50D1 /* libPods-Videa.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -172,6 +175,7 @@
 		ECEF0E397F140DDD194F934D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F99A4A522816C2D400FDC3DB /* WebKit.framework */,
 				80D2B21CA1AFDBEA64A95C6A /* libPods-Videa.a */,
 			);
 			name = Frameworks;

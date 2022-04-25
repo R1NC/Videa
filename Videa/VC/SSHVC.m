@@ -31,7 +31,7 @@
     self.tfCommand.delegate = self;
 }
 
-- (void)dealloc {
+-(void)willMoveToParentViewController:(nullable UIViewController *)vc {
     [SSH.shared disconnect];
 }
 

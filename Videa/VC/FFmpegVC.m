@@ -81,7 +81,8 @@
     [AFNetworkReachabilityManager.sharedManager stopMonitoring];
 }
 
--(void)dealloc {
+-(void)willMoveToParentViewController:(nullable UIViewController *)vc {
+    [super willMoveToParentViewController:vc];
     [self deleteTempVideoFile];
     if (_isWorking) {
         [FFmpegKit cancel];

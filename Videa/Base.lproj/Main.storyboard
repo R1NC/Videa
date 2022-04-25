@@ -81,44 +81,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入链接" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eGU-39-Ewe">
-                                <rect key="frame" x="10" y="98" width="394" height="35"/>
+                                <rect key="frame" x="10" y="98" width="271" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Ifs-aw-VzT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL" returnKeyType="go"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-CD-2tq">
-                                <rect key="frame" x="10" y="183" width="394" height="648.5"/>
-                                <color key="backgroundColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="0.10276648116438356" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rop-7F-fjm">
-                                <rect key="frame" x="10" y="138" width="197" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="aiR-ho-ybU"/>
-                                </constraints>
-                                <state key="normal" title="播放"/>
-                                <connections>
-                                    <action selector="onClickBtnPlay:" destination="DFw-f4-4xt" eventType="touchUpInside" id="TJl-6U-WRY"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNk-rI-6KR">
-                                <rect key="frame" x="207" y="138" width="197" height="35"/>
+                                <rect key="frame" x="379" y="98" width="30" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="MW7-Zb-FPX"/>
+                                    <constraint firstAttribute="width" constant="30" id="xZO-wx-n1Z"/>
                                 </constraints>
-                                <state key="normal" title="下载"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="⤓"/>
                                 <connections>
                                     <action selector="onClickBtnDownload:" destination="DFw-f4-4xt" eventType="touchUpInside" id="Po5-El-Rjc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Q6-JZ-lDy">
+                                <rect key="frame" x="348" y="98" width="30" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="6wO-Fd-Pnp"/>
+                                    <constraint firstAttribute="height" constant="35" id="7Ju-xE-WmR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="→"/>
+                                <connections>
+                                    <action selector="onClickBtnNext:" destination="DFw-f4-4xt" eventType="touchUpInside" id="2gZ-ug-BQs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YDG-w6-OvJ">
+                                <rect key="frame" x="317" y="98" width="30" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="TjL-qq-4kz"/>
+                                    <constraint firstAttribute="height" constant="35" id="eaZ-Fg-W6C"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="↻"/>
+                                <connections>
+                                    <action selector="onClickBtnReload:" destination="DFw-f4-4xt" eventType="touchUpInside" id="eTC-vf-KEd"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhf-Xc-ilT" userLabel="BottomView">
@@ -143,45 +146,70 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hg8-jT-NSO">
                                 <rect key="frame" x="10" y="841.5" width="394" height="4"/>
                             </progressView>
+                            <wkWebView contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WFz-qA-Asj">
+                                <rect key="frame" x="10" y="143" width="394" height="688.5"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" audio="YES" video="YES"/>
+                                    <wkPreferences key="preferences" javaScriptCanOpenWindowsAutomatically="YES" minimumFontSize="10"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AND-Uh-Igf">
+                                <rect key="frame" x="286" y="98" width="30" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="1OK-VJ-aPV"/>
+                                    <constraint firstAttribute="width" constant="30" id="3jm-Be-Rtb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="←"/>
+                                <connections>
+                                    <action selector="onClickBtnPrev:" destination="DFw-f4-4xt" eventType="touchUpInside" id="zwl-3w-5Y6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="kCI-HC-OQV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Rop-7F-fjm" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="0Qg-kJ-pBP"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="bottom" secondItem="Rhf-Xc-ilT" secondAttribute="bottom" id="0Z3-1i-nKl"/>
+                            <constraint firstItem="YDG-w6-OvJ" firstAttribute="leading" secondItem="AND-Uh-Igf" secondAttribute="trailing" constant="1" id="17g-dQ-cuY"/>
+                            <constraint firstItem="YNk-rI-6KR" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="1Rn-V9-JgG"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="6oX-ZW-hg5"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="xAr-CD-2tq" secondAttribute="trailing" constant="10" id="7Hs-rz-8fZ"/>
-                            <constraint firstItem="Rop-7F-fjm" firstAttribute="width" secondItem="YNk-rI-6KR" secondAttribute="width" id="7xp-ZV-Mzc"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="WFz-qA-Asj" secondAttribute="trailing" constant="10" id="7vZ-yu-hB5"/>
+                            <constraint firstItem="YDG-w6-OvJ" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="8yt-KA-DN5"/>
+                            <constraint firstItem="hg8-jT-NSO" firstAttribute="top" secondItem="WFz-qA-Asj" secondAttribute="bottom" constant="10" id="EmE-1X-cJM"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="hg8-jT-NSO" secondAttribute="trailing" constant="10" id="F1I-er-APp"/>
-                            <constraint firstItem="Rop-7F-fjm" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="FFA-Dq-HqZ"/>
                             <constraint firstItem="Rhf-Xc-ilT" firstAttribute="top" secondItem="EaB-ZW-vaj" secondAttribute="bottom" id="Ija-B2-JdJ"/>
-                            <constraint firstItem="YNk-rI-6KR" firstAttribute="leading" secondItem="Rop-7F-fjm" secondAttribute="trailing" id="JRK-U9-2xa"/>
-                            <constraint firstItem="hg8-jT-NSO" firstAttribute="top" secondItem="xAr-CD-2tq" secondAttribute="bottom" constant="10" id="Ngb-Dp-rOS"/>
-                            <constraint firstItem="xAr-CD-2tq" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="NiZ-GA-dTd"/>
+                            <constraint firstItem="YNk-rI-6KR" firstAttribute="leading" secondItem="0Q6-JZ-lDy" secondAttribute="trailing" constant="1" id="Mzq-kE-f3u"/>
                             <constraint firstItem="Rhf-Xc-ilT" firstAttribute="top" secondItem="scY-YW-BlP" secondAttribute="bottom" id="PE5-Qn-Kap"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="YNk-rI-6KR" secondAttribute="trailing" constant="10" id="UqK-Zi-l8v"/>
+                            <constraint firstItem="AND-Uh-Igf" firstAttribute="leading" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="5" id="Qsw-gI-uwt"/>
+                            <constraint firstItem="0Q6-JZ-lDy" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="T7P-Pf-vpg"/>
+                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="YNk-rI-6KR" secondAttribute="trailing" constant="5" id="UqK-Zi-l8v"/>
+                            <constraint firstItem="0Q6-JZ-lDy" firstAttribute="leading" secondItem="YDG-w6-OvJ" secondAttribute="trailing" constant="1" id="X90-Zd-ofE"/>
+                            <constraint firstItem="WFz-qA-Asj" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="10" id="YSQ-rq-qzI"/>
                             <constraint firstItem="Rhf-Xc-ilT" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" id="YVp-uk-pHd"/>
+                            <constraint firstItem="AND-Uh-Igf" firstAttribute="top" secondItem="kCI-HC-OQV" secondAttribute="top" constant="10" id="YuN-jO-dOt"/>
                             <constraint firstItem="EaB-ZW-vaj" firstAttribute="top" secondItem="hg8-jT-NSO" secondAttribute="bottom" constant="2" id="Zae-FL-759"/>
+                            <constraint firstItem="WFz-qA-Asj" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="bQ0-K8-VdK"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="scY-YW-BlP" secondAttribute="trailing" constant="10" id="dgD-uq-71h"/>
                             <constraint firstItem="hg8-jT-NSO" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="hyE-kr-ME4"/>
-                            <constraint firstItem="xAr-CD-2tq" firstAttribute="top" secondItem="Rop-7F-fjm" secondAttribute="bottom" constant="10" id="jfE-HS-e3k"/>
                             <constraint firstItem="EaB-ZW-vaj" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="lDn-r6-QpQ"/>
-                            <constraint firstItem="YNk-rI-6KR" firstAttribute="top" secondItem="eGU-39-Ewe" secondAttribute="bottom" constant="5" id="mTs-Kw-k1g"/>
                             <constraint firstItem="eGU-39-Ewe" firstAttribute="leading" secondItem="kCI-HC-OQV" secondAttribute="leading" constant="10" id="mYd-hr-bj0"/>
-                            <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="eGU-39-Ewe" secondAttribute="trailing" constant="10" id="syC-LA-ddG"/>
                             <constraint firstItem="kCI-HC-OQV" firstAttribute="trailing" secondItem="Rhf-Xc-ilT" secondAttribute="trailing" id="yNs-Tp-EhH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="m3u8 播放/下载" id="j7J-Up-E65"/>
                     <connections>
                         <outlet property="btnDownload" destination="YNk-rI-6KR" id="TpW-U7-lYN"/>
-                        <outlet property="btnPlay" destination="Rop-7F-fjm" id="f3b-Bq-zrS"/>
+                        <outlet property="btnNext" destination="0Q6-JZ-lDy" id="RtR-zq-UTr"/>
+                        <outlet property="btnPrev" destination="AND-Uh-Igf" id="d6q-Kr-6el"/>
+                        <outlet property="btnReload" destination="YDG-w6-OvJ" id="axv-A4-yqX"/>
                         <outlet property="constraintHeightOfBottomView" destination="41p-Cb-58o" id="JNf-O0-Yzn"/>
                         <outlet property="labelDuration" destination="scY-YW-BlP" id="ZGh-gi-Gk9"/>
                         <outlet property="labelTime" destination="EaB-ZW-vaj" id="xDt-g2-anI"/>
                         <outlet property="progressView" destination="hg8-jT-NSO" id="Cac-SX-fln"/>
-                        <outlet property="tvInfo" destination="xAr-CD-2tq" id="Pz6-5B-gvr"/>
                         <outlet property="tvUrl" destination="eGU-39-Ewe" id="Pl2-ng-UV2"/>
+                        <outlet property="webView" destination="WFz-qA-Asj" id="yCx-d9-KgA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1i-AL-f5K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

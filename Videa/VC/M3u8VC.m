@@ -11,10 +11,11 @@
 #import "UIUtil.h"
 #import<AVKit/AVKit.h>
 #import<AVFoundation/AVFoundation.h>
+#import <WebKit/WebKit.h>
 
 #define DEFAULT_TIME_TEXT @"00:00:00.00"
 
-@interface M3u8VC ()<UITextFieldDelegate>
+@interface M3u8VC ()<UITextFieldDelegate, WKNavigationDelegate, WKUIDelegate>
 
 @property(nonatomic,assign) NSUInteger pasteboardChangeCount;
 @property(nonatomic,strong) AVPlayerViewController* avpVC;
@@ -36,33 +37,82 @@
     _avpVC = [AVPlayerViewController new];
     _avpVC.allowsPictureInPicturePlayback = YES;
     _progressView.progress = 0;
+    
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
+    self.webView.allowsBackForwardNavigationGestures = YES;
+    self.webView.configuration.allowsInlineMediaPlayback = YES;
+    self.webView.configuration.allowsAirPlayForMediaPlayback = YES;
+    self.webView.configuration.allowsPictureInPictureMediaPlayback = YES;
+    self.webView.configuration.preferences.minimumFontSize = 10;
+    self.webView.configuration.preferences.javaScriptEnabled = YES;
+    if (@available(iOS 14.5, *)) {
+        self.webView.configuration.preferences.textInteractionEnabled = YES;
+    }
+    self.webView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = YES;
 }
 
-- (void)dealloc:(BOOL)animated {
+-(void)willMoveToParentViewController:(nullable UIViewController *)vc {
+    [super willMoveToParentViewController:vc];
+    [self stopLoad];
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self checkM3u8Url:textField.text handler:^(BOOL valid) {
-        if (!valid) {
-            [self toastMsg:@"链接不合法或者没有找到 m3u8 资源"];
-            textField.text = nil;
-        }
-    }];
+    [textField resignFirstResponder];
+    if (textField == self.tvUrl) {
+        return [self loadUrl:self.tvUrl.text];
+    }
     return NO;
+}
+
+- (BOOL)loadUrl:(NSString*)url {
+    if (url && url.length > 0) {
+        [self stopLoad];
+        if ([url rangeOfString:@"http://"].location == NSNotFound || [url rangeOfString:@"https://"].location == NSNotFound) {
+            url = [@"http://" stringByAppendingString:url];
+        }
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)stopLoad {
+    if (self.webView.isLoading) {
+        [self.webView stopLoading];
+    }
 }
 
 - (void)pasteboardChangedNotification:(NSNotification*)notification {
     UIPasteboard* pb = [UIPasteboard generalPasteboard];
     _pasteboardChangeCount = pb.changeCount;
     if (pb.strings && pb.strings.count > 0 && pb.strings.firstObject && pb.strings.firstObject.length > 0) {
-        [self checkM3u8Url:pb.strings.firstObject handler:^(BOOL valid) {
-        }];
+        if ([self loadUrl:pb.strings.firstObject]) {
+            self.tvUrl.text = pb.strings.firstObject;
+        }
     }
 }
 
-- (IBAction)onClickBtnPlay:(id)sender {
-    [self playM3u8];
+- (IBAction)onClickBtnPrev:(id)sender {
+    if (self.webView.canGoBack) {
+        [self stopLoad];
+        [self.webView goBack];
+    }
+}
+
+- (IBAction)onClickBtnReload:(id)sender {
+    if (self.webView.canGoBack) {
+        [self stopLoad];
+        [self.webView reload];
+    }
+}
+
+- (IBAction)onClickBtnNext:(id)sender {
+    if (self.webView.canGoForward) {
+        [self stopLoad];
+        [self.webView goForward];
+    }
 }
 
 - (IBAction)onClickBtnDownload:(id)sender {
@@ -81,6 +131,32 @@
     }
 }
 
+#pragma mark WKUIDelegate
+
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+  if (!navigationAction.targetFrame.isMainFrame) {
+      [webView loadRequest:navigationAction.request];
+  }
+  return nil;
+}
+
+#pragma mark WKNavigationDelegate
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation {
+    self.tvUrl.text = self.webView.URL.absoluteString;
+    self.btnDownload.enabled = NO;
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation {
+    self.tvUrl.text = self.webView.URL.absoluteString;
+    self.btnPrev.enabled = self.webView.canGoBack;
+    self.btnReload.enabled = YES;
+    self.btnNext.enabled = self.webView.canGoForward;
+    [self checkM3u8Url:self.tvUrl.text handler:^(BOOL valid) {
+        self.btnDownload.enabled = valid;
+    }];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -93,7 +169,6 @@
 
 -(void)didReceiveFFmpegLog:(NSString*)log {
     [super didReceiveFFmpegLog:log];
-    [UIUtil textView:_tvInfo appendLine:log];
     
     if (self.durationIsReady) {
         self.labelDuration.text = log;
@@ -130,9 +205,7 @@
         self.m3u8Url = url;
         runOnUIThread(^{
             [self.view endEditing:YES];
-            self.tvUrl.text = url;
             self.avpVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:url]];
-            self.btnPlay.enabled = YES;
             self.btnDownload.enabled = YES;
             if (handler) handler(YES);
         });
@@ -140,7 +213,6 @@
     void(^invalidBlock)(void) = ^ {
         runOnUIThread(^{
             [self.view endEditing:YES];
-            self.btnPlay.enabled = NO;
             self.btnDownload.enabled = NO;
             if (handler) handler(NO);
         });
