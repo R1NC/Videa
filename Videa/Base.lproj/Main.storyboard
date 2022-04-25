@@ -201,7 +201,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4Np-C8-hBQ"/>
                                 </constraints>
-                                <state key="normal" title="转换"/>
+                                <state key="normal" title="提取"/>
                                 <connections>
                                     <action selector="onClickBtnExport:" destination="u0S-vL-kde" eventType="touchUpInside" id="maG-u1-fRH"/>
                                 </connections>
@@ -284,10 +284,7 @@
                                     <constraint firstAttribute="height" constant="35" id="e7q-0u-OaB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="onPasswordEditEnd:" destination="JYo-PR-BK6" eventType="editingDidEnd" id="dMn-Ba-5qB"/>
-                                </connections>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="命令行" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CaO-WH-0wg">
                                 <rect key="frame" x="10" y="795" width="394" height="35"/>
@@ -296,9 +293,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="onCommandEditEnd:" destination="JYo-PR-BK6" eventType="editingDidEnd" id="bkb-IZ-1Q4"/>
-                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="用户名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cGc-sQ-G3i">
                                 <rect key="frame" x="177" y="98" width="60" height="35"/>
@@ -307,10 +301,7 @@
                                     <constraint firstAttribute="height" constant="35" id="afF-zq-6BG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="onPasswordEditEnd:" destination="JYo-PR-BK6" eventType="editingDidEnd" id="qTR-yb-3jQ"/>
-                                </connections>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="next"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6L-cA-Sfl" userLabel="BottomView">
                                 <rect key="frame" x="30" y="861" width="354" height="1"/>
@@ -334,9 +325,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES"/>
-                                <connections>
-                                    <action selector="onPasswordEditEnd:" destination="JYo-PR-BK6" eventType="editingDidEnd" id="mSr-vJ-ssh"/>
-                                </connections>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ifN-K0-ilf"/>

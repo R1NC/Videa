@@ -11,7 +11,7 @@
 #import "Toast.h"
 #import "SSH.h"
 
-@interface SSHVC()<SSHDelegate>
+@interface SSHVC()<UITextFieldDelegate, SSHDelegate>
 
 @property(nonatomic,strong) dispatch_queue_t queue;
 @property(nonatomic,assign) BOOL connected;
@@ -24,6 +24,11 @@
     [super viewDidLoad];
     _queue = dispatch_queue_create("SSH", DISPATCH_QUEUE_SERIAL);
     [SSH shared].delegate = self;
+    
+    self.tfHost.delegate = self;
+    self.tfUser.delegate = self;
+    self.tfPassword.delegate = self;
+    self.tfCommand.delegate = self;
 }
 
 - (void)dealloc {
@@ -35,15 +40,6 @@
     [UIUtil scrollTextViewToBottom:self.tvConsole];
 }
 
-- (IBAction)onPasswordEditEnd:(id)sender {
-    [self connect];
-}
-
-- (IBAction)onCommandEditEnd:(id)sender {
-    if (!self.tfCommand.text || self.tfCommand.text.length == 0) return;
-    [self exeCmd:self.tfCommand.text];
-}
-
 - (IBAction)onClickBtnCtrlC:(id)sender {
     [self exeCmd:@"\x03"];
 }
@@ -51,6 +47,28 @@
 -(void)setKeyBoardBgViewHeight:(CGFloat)height {
     self.constraintBottomViewHeight.constant = height;
     [self.view setNeedsUpdateConstraints];
+}
+
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    if (textField == self.tfHost) {
+        [self.tfUser becomeFirstResponder];
+        return NO;
+    } else if (textField == self.tfUser) {
+        [self.tfPassword becomeFirstResponder];
+        return NO;
+    } else if (textField == self.tfPassword) {
+        [self connect];
+        return YES;
+    } else if (textField == self.tfCommand) {
+        if (self.tfCommand.text && self.tfCommand.text.length > 0) {
+            [self exeCmd:self.tfCommand.text];
+        }
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark SSH working
