@@ -99,6 +99,8 @@ v.exclusiveTouch = YES;\
 
 +(void)textView:(UITextView*)tv appendLine:(NSString*)line;
 
++ (void)scrollTextViewToBottom:(UITextView*)tv;
+
 @end
 
 #endif /* UIUtil_h */

@@ -98,6 +98,11 @@ static NSTimeInterval lastClick;
 +(void)textView:(UITextView *)tv appendLine:(NSString *)line {
     NSString* txt = tv.text ? tv.text : @"";
     tv.text = [txt stringByAppendingFormat:@"\n%@", line];
+    [self.class scrollTextViewToBottom:tv];
+}
+
++ (void)scrollTextViewToBottom:(UITextView*)tv {
+    if (!tv.text) return;
     [tv scrollRangeToVisible:NSMakeRange(tv.text.length -1, 1)];
 }
 

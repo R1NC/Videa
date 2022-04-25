@@ -12,6 +12,8 @@
 #import<AVKit/AVKit.h>
 #import<AVFoundation/AVFoundation.h>
 
+#define DEFAULT_TIME_TEXT @"00:00:00.00"
+
 @interface M3u8VC ()<UITextFieldDelegate>
 
 @property(nonatomic,assign) NSUInteger pasteboardChangeCount;
@@ -150,8 +152,8 @@
                 self.durationIsReady = NO;
                 self.duration = 0;
                 self.progressView.progress = 0;
-                self.labelTime.text = @"00:00:00.00";
-                self.labelDuration.text = @"00:00:00.00";
+                self.labelTime.text = DEFAULT_TIME_TEXT;
+                self.labelDuration.text = DEFAULT_TIME_TEXT;
                 
                 [self runTask:^{
                     NSString* html = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlStr] encoding:NSUTF8StringEncoding error:nil];

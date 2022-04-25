@@ -30,13 +30,17 @@
     [SSH.shared disconnect];
 }
 
+- (void)keyboardDidShow:(CGRect)frame {
+    [super keyboardDidShow:frame];
+    [UIUtil scrollTextViewToBottom:self.tvConsole];
+}
+
 - (IBAction)onPasswordEditEnd:(id)sender {
     [self connect];
 }
 
 - (IBAction)onCommandEditEnd:(id)sender {
     if (!self.tfCommand.text || self.tfCommand.text.length == 0) return;
-    self.tfCommand.enabled = NO;
     [self exeCmd:self.tfCommand.text];
 }
 
@@ -88,7 +92,6 @@
 
 -(void)onSSHReceivedServerMessage:(NSString *)message {
     runOnUIThread(^{
-        self.tfCommand.enabled = YES;
         self.tfCommand.text = nil;
         [UIUtil textView:self.tvConsole appendLine:message];
     });
