@@ -5,3 +5,4 @@
 - [x] Video -> GIF;
 - [x] Download m3u8;
 - [x] Video -> Audio;
+- [x] SSH terminal;
