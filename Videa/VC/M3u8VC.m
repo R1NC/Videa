@@ -69,9 +69,9 @@
 - (BOOL)loadUrl:(NSString*)url {
     if (url && url.length > 0) {
         [self stopLoad];
-        if ([url rangeOfString:@"http://"].location == NSNotFound || [url rangeOfString:@"https://"].location == NSNotFound) {
+        /*if ([url rangeOfString:@"http://"].location == NSNotFound || [url rangeOfString:@"https://"].location == NSNotFound) {
             url = [@"http://" stringByAppendingString:url];
-        }
+        }*/
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
         return YES;
     }
